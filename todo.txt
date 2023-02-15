@@ -1,0 +1,34 @@
+Initialisation
+
+- initImageFond();
+- initMurs();
+- initSons();
+- initLodeRunner();
+- initGardes();
+- initLingots();
+
+Dessiner
+- dessinerMur();
+- dessinerFond();
+- dessinerBrique();
+- dessinnerEchelle();
+- desinnerLingots();
+
+- dessinerTrous();
+- dessinerLodeRunner();
+	-> qui marche (environ 4 images différentes)
+	-> qui est statique
+- dessinerGardes();
+
+
+Tester collisions
+
+- binCollMurs
+- binCollBriques
+
+
+Mise à jour
+- deplacementLodeRunner();
+- deplacementGarde();
+	-> sur briques, en chute, sur les échelles
+- deplacement
