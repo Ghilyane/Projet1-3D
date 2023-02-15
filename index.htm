@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>X</title>
+  <link rel="stylesheet" type="text/css" href="" />
+  <!-- Code JavaScript local -->
+  <script src="briques.js"></script>
+  <script type="text/javascript">
+
+	var objCanvas = null;
+	var objC2D = null;
+    var objCycleAnimation = null;
+    var tabInitial = null;
+    var tabObjets = null;
+    var tabChar = null;
+    var brique = null
+        
+    function initAnimation() {
+        brique = new Brique();
+        objCanvas = document.getElementById('monCanvas');
+		objCanvas.focus();
+        objC2D = objCanvas.getContext('2d');
+        tabInitial = ["............................",
+            "....2.......................",
+            "111111131111111.............",
+            ".......34444444444.....2....",
+            ".......3....113...1111111311",
+            ".......3....113..........3..",
+            ".......3....113.......2..3..",
+            "11311111....1111111131111111",
+            "..3.................3.......",
+            "..3.................3.......",
+            "111111111311111111..3.......",
+            ".........3..........3.......",
+            ".......2.344444444443...2...",
+            "....3111111.........11111113",
+            "....3.............2........3",
+            "1111111111111111111111111111",
+            "5555555555555555555555555555"
+        ]
+
+        tabObjets = new Array();
+	    dessiner(); // Dessiner une première fois
+        animer();  // animer
+        initSons()
+
+        tabChar = [];
+
+        for (var i = 0; i < tabInitial.length; i++) {
+            tabChar.push(tabInitial[i].split(''))
+        }
+
+        for (var i = 0; i < tabChar.length; i++) {
+            for (var j = 0; j < tabChar[0].length; j++) {
+                console.log(tabChar[i][j]);
+            }
+        }
+    }
+
+    // Aller chercher l'image de fond
+    function initImageFond() {
+        objImageFond = new Image();
+        objImageFond.src = 'fond.jpg'; 
+    }
+
+
+    // Construire les sons
+    function initSons() {
+        objSons = new Object();
+
+        var objSon = document.createElement('audio');
+        objSon.setAttribute('src', 'SonBalleMur.mp3');
+        objSon.load();
+        objSons.balleMur = objSon;
+    }
+
+
+    // Un cycle d'animation	
+    function animer() {
+        // Requête pour le prochain cycle
+        objCycleAnimation = requestAnimationFrame(animer);
+
+		// Le cycle d'animation
+		effacerDessin();
+		mettreAjourAnimation();
+		dessiner();
+	}
+
+    // Arrêter l'animation
+	function arreterAnimation() {
+	    if (objCycleAnimation != null)
+	        cancelAnimationFrame(objCycleAnimation);
+		objCycleAnimation = null;
+	}
+		
+	// Pour effacer le dessin
+	function effacerDessin() {
+		objC2D.clearRect(0,0, objCanvas.width, objCanvas.height); 
+	}
+		
+	// Pour mettre à jour l'animation
+	function mettreAjourAnimation() {
+
+        
+	}
+
+
+    // Pour dessiner
+	function dessiner() {
+        // dessinerFond();
+        brique.dessinerBrique(objC2D, tabChar);
+	}
+
+
+   </script>
+</head>
+
+<body onload="initAnimation()"> 
+	<canvas id="monCanvas" width="960" height="640" tabIndex="1" >
+		Votre navigateur ne supporte pas la balise canvas
+	</canvas>
+</body>
+
+</html>
