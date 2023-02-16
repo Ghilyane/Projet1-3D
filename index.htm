@@ -18,6 +18,8 @@
   <script src="lodeRunner.js"> </script>
   <script src="jeuPrincipal.js"> </script>
   <script src="placementElementsFixes.js"> </script>
+  <script src="lodeRunner.js"> </script>
+
 
   
   <script type="text/javascript">
@@ -37,6 +39,7 @@
     var echelle = null;
     var lingot = null;
     var corde = null;
+    var lodeRunner = null;
     var x = 0;
 
     function initAnimation() {
@@ -53,6 +56,8 @@
       echelle = new Echelle();
       lingot = new Lingot();
       corde = new Corde();
+      lodeRunner = new Runner();
+
       initCanvas(objC2D);
       initTableau(objC2D);
       initBrique(objImgBrique);
@@ -71,6 +76,7 @@
       echelle.dessinerEchelle(objC2D, objImgEchelle);
       lingot.dessinerLingot(objC2D, objImgLingot);
       corde.dessinerCorde(objC2D, objImgCorde);
+      lodeRunner.dessinerLodeRunner(objC2D);
       //petites composantes dans fichier js
 
     }
