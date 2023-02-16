@@ -7,7 +7,6 @@ function Corde(intHauteur, intLargeur) {
 
 
 function initCorde(objImgCorde) {
-    objImgCorde = new Image();
     objImgCorde.src = './Images/corde.png';
 }
 
@@ -24,7 +23,7 @@ Corde.prototype.dessinerCorde = function (objC2D, objImgCorde) {
             if (tabElements[i][j] == "4") {
                 // console.log(2) 
                 // console.log(typeof objImgCorde);
-                objC2D.drawImage(imgCorde, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
+                objC2D.drawImage(objImgCorde, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
             }
         }
     }

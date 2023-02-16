@@ -18,7 +18,6 @@ function Lingot(intHauteur, intLargeur) {
 }
 
 function initLingot(objImgLingot) {
-    objImgLingot = new Image();
     objImgLingot.src = './Images/gold.jpg';
 }
 
@@ -35,7 +34,7 @@ Lingot.prototype.dessinerLingot = function (objC2D) {
             if (tabElements[i][j] == "2") {
                 // console.log(2) 
                 // console.log(typeof objImgLingot);
-                objC2D.drawImage(imgLingot, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
+                objC2D.drawImage(objImgLingot, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
             }
         }
     }
