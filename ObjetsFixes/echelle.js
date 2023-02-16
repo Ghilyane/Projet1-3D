@@ -18,7 +18,6 @@ function Echelle(intHauteur, intLargeur) {
 
 
 function initEchelle(objImgEchelle) {
-    objImgEchelle = new Image();
     objImgEchelle.src = './Images/ladder2.png';
 }
 
@@ -34,7 +33,7 @@ Echelle.prototype.dessinerEchelle = function (objC2D, objImgEchelle) {
         for (var j = 0; j < tabElements[0].length; j++) {
             if (tabElements[i][j] == "3") {
                 // console.log(typeof objImgEchelle);
-                objC2D.drawImage(imgEchelle, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
+                objC2D.drawImage(objImgEchelle, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
             }
         }
     }

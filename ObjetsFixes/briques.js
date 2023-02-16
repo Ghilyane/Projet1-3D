@@ -7,7 +7,6 @@ function Brique(intHauteur, intLargeur) {
 
 //pas obligatoire pour certains
 function initBrique(objImgBrique) {
-    objImgBrique = new Image();
     objImgBrique.src = './Images/brique.png';
 }
 
@@ -23,7 +22,7 @@ Brique.prototype.dessinerBrique = function (objC2D) {
             if (tabElements[i][j] == "1") {
                 // console.log(2) 
                 // console.log(typeof objImgBrique);
-                objC2D.drawImage(imgBrique, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
+                objC2D.drawImage(objImgBrique, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
             }
         }
     }

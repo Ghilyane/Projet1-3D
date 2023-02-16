@@ -7,7 +7,6 @@ function Beton(intHauteur, intLargeur) {
 
 //pas obligatoire pour certains
 function initBeton() {
-    objImgBeton = new Image();
     objImgBeton.src = './Images/béton.jpg';
 }
 
