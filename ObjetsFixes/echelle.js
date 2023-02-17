@@ -1,39 +1,21 @@
-// function Echelle(){
-//     let objEchelle = new Object()
-//     objEchelle.X = 0
-//     objEchelle.Y = 0
-//     objEchelle.intLargeur = 5
-//     objEchelle.intHauteur = 3
-//     objEchelle.strCouleur = 'yellow'
+var objImgEchelle = null;
 
-//     return objEchelle
-// }
-
-function Echelle(intHauteur, intLargeur) {
-    this.intHauteur = intHauteur;
-    this.intLargeur = intLargeur;
-    this.binTroue = false;
+function Echelle() {
 }
 
-
-
-function initEchelle(objImgEchelle) {
+function initEchelle() {
+    objImgEchelle = new Image();
     objImgEchelle.src = './Images/ladder2.png';
 }
 
-
-Echelle.prototype.dessinerEchelle = function (objC2D, objImgEchelle) {
+Echelle.prototype.dessinerEchelle = function (objC2D) {
     objC2D.save();
+    objC2D.translate(intLargeur, intHauteur);
 
-    var tabElements = creerTabChar(tabInitial);
-    this.intHauteur = objCanvas.height / 17;
-    this.intLargeur = objCanvas.width / 28;
-    
-    for (var i = 0; i < tabElements.length; i++) {
-        for (var j = 0; j < tabElements[0].length; j++) {
-            if (tabElements[i][j] == "3") {
-                // console.log(typeof objImgEchelle);
-                objC2D.drawImage(objImgEchelle, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
+    for (var i = 0; i < tabChar.length; i++) {
+        for (var j = 0; j < tabChar[0].length; j++) {
+            if (tabChar[i][j] == "3") {
+                objC2D.drawImage(objImgEchelle, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
             }
         }
     }

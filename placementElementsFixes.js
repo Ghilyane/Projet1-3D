@@ -18,17 +18,9 @@ var tabInitial = ["............................",
 
 var tabChar = [];
 
-function creerTabChar(tabInitial) {
-
+function initTabChar(tabInitial) {
         for (var i = 0; i < tabInitial.length; i++) {
                 tabChar.push(tabInitial[i].split(''))
         }
-        
-        for (var i = 0; i < tabChar.length; i++) {
-                for (var j = 0; j < tabChar[0].length; j++) {
-                }
-        }
-
-        return tabChar;
 }
 //créer d'autres tableaux pour les autres niveaux - jouer avec le nb de gardes
