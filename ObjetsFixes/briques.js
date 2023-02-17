@@ -17,6 +17,7 @@ Brique.prototype.dessinerBrique = function (objC2D) {
     for (var i = 0; i < tabChar.length; i++) {
         for (var j = 0; j < tabChar[0].length; j++) {
             if (tabChar[i][j] == "1") {
+                
                 objC2D.drawImage(objImgBrique, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
             }
         }

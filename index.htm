@@ -113,14 +113,14 @@
     function dessiner() {
       dessinerFond();
       dessinerMurs();
+      dessinerInfo();
       brique.dessinerBrique(objC2D);
       beton.dessinerBeton(objC2D);
       echelle.dessinerEchelle(objC2D);
       lingot.dessinerLingot(objC2D);
       corde.dessinerCorde(objC2D);
-      dessinerInfo();
+      lodeRunner.dessinerLodeRunner(objC2D);
       // dessinerGrillage();
-      // lodeRunner.dessinerLodeRunner(objC2D);
       //petites composantes dans fichier js
 
     }
@@ -194,7 +194,6 @@
       for (var intNoMur = 0; intNoMur < tabObjMurs.length; intNoMur++) {
         var objMur = tabObjMurs[intNoMur];
 
-        // Le dégradé radial
         var intCentreX = (objMur.intXDebut + objMur.intXFin) / 2;
         var intCentreY = (objMur.intYDebut + objMur.intYFin) / 2;
         var intRayon = (intNoMur == 1) ? Math.abs(objMur.intXFin - objMur.intXDebut) / 2
@@ -238,6 +237,7 @@
 
     function mettreAJourAnimation() {
       mettreAjourChrono();
+      miseAJourLode();
     }
 
     // Arrêter l'animation
@@ -260,7 +260,7 @@
 
 <body onload="initAnimation()">
   <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
-  <canvas id="monCanvas" width="1100" height="700" tabindex="1" onmousedown="demarrer(event)"> </canvas>
+  <canvas id="monCanvas" width="1100" height="700" tabindex="1" onmousedown="demarrer(event)" onkeydown="lodeRunner.gererDeplacementRunner()"> </canvas>
   <script>
   </script>
 </body>
