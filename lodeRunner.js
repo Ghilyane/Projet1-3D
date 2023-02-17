@@ -27,7 +27,6 @@ Runner.prototype.dessinerLodeRunner = function (objC2D) {
     objC2D.beginPath();
     objC2D.fillStyle = 'blue';
     objC2D.fillRect(this.intX, this.intY, this.intLargeur, this.intHauteur);
-    console.log(this.intX);
     objC2D.restore();
 }
 
@@ -49,25 +48,22 @@ Runner.prototype.gererDeplacementRunner = function() {
         case 37:
             // console.log("gauche");
             this.intDirection = -1;
-            // this.binDeplacable = (this.intX + this.intLargeur + this.intVitesse) >= objCanvas.width
+            this.binDeplacable = (this.intX + this.intLargeur + this.intVitesse) >= objCanvas.width
             this.binDeplacable = true;
             break;
         case 39:
             // console.log("droite");
             this.intDirection = 1;
-            this.binDeplacable = true;
-            // this.binDeplacable = (this.intX - this.intVitesse) <= objCanvas.width
+            this.binDeplacable = (this.intX - this.intVitesse) <= objCanvas.width
             break;
     }
 
-    console.log(this.binDeplacable);
     if (this.binDeplacable){
         this.intVitesse = 5;
         this.intX += this.intVitesse * this.intDirection
-        // console.log("vitesse : " + this.intVitesse + " direction : " + this.intDirection)
     }
 
-    console.log("X chang " + this.intX)
+    console.log(this.binDeplacable);
 
 }
 
