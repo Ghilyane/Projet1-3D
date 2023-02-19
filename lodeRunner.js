@@ -6,12 +6,15 @@ function Runner(intHauteur, intLargeur) {
     this.intY = (objCanvas.height/8)*5
     this.deplX = objCanvas.width / 2;
     this.deplY = (objCanvas.height/8)*5
+    this.intPied = this.intX + this.intHauteur;
+    this.intGauche = this.intLargeur - this.intX;
     this.fltXVitesse = 0; //constante
     this.fltYTomber = 0; // constante 
     this.fltYMonter = 0; //constante - plus rapide que tomber
     this.intDirection = 1
-    this.intVitesse = 2;
-    this.binDeplacable = true;
+    this.intVitesse = 5;
+    this.binDeplacableX = false;
+    this.binDeplacableY = false;
 }
 
 //variables de temps
@@ -46,24 +49,44 @@ Runner.prototype.gererDeplacementRunner = function() {
         //40 - bas
         
         case 37:
-            // console.log("gauche");
+            var objMur = tabObjMurs[0];
             this.intDirection = -1;
-            this.binDeplacable = (this.intX + this.intLargeur + this.intVitesse) >= objCanvas.width
-            this.binDeplacable = true;
+            this.binDeplacableY = false;
+            this.binDeplacableX = (this.intX - (2*this.intVitesse)/5) >= objMur.intXFin
+            break;
+        case 38:
+            var objMur = tabObjMurs[1];
+            this.intDirection = -1;
+            this.binDeplacableX = false;
+            this.binDeplacableY =  (this.intY - this.intVitesse) >= objMur.intYFin
             break;
         case 39:
-            // console.log("droite");
+            var objMur = tabObjMurs[2];
             this.intDirection = 1;
-            this.binDeplacable = (this.intX - this.intVitesse) <= objCanvas.width
+            this.binDeplacableY = false;
+            this.binDeplacableX = (this.intX + (2*this.intVitesse)/5 + this.intLargeur + (objMur.intXDebut - objMur.intXFin)) <= objMur.intXDebut
+        break;
+        case 40:
+            var objMur = tabObjMurs[3];
+            this.intDirection = 1;
+            this.binDeplacableX = false;
+            this.binDeplacableY =  (this.intY +  this.intVitesse + (10*this.intHauteur)/2.25) <= objMur.intYDebut
             break;
     }
 
-    if (this.binDeplacable){
-        this.intVitesse = 5;
+    if (this.binDeplacableX && !this.binDeplacableY){
         this.intX += this.intVitesse * this.intDirection
+        // console.log(2)
     }
 
-    console.log(this.binDeplacable);
+    if (this.binDeplacableY && !this.binDeplacableX) {
+        this.intY += this.intVitesse * this.intDirection
+        // console.log(3)
+    }
+
+
+    console.log("X : " + this.binDeplacableX + " Y : " + this.binDeplacableY)
+
 
 }
 

@@ -9,7 +9,6 @@ var intMsEcoulees = 0;
 
 function mettreAjourChrono() {
     var objDateHeure2 = Date.now();
-    // console.log("objdate1 : " + objDateHeure1 + "objDate2 : " + objDateHeure2)
     if (booStart) {
         intMsEcoulees += objDateHeure2 - objDateHeure1;
     }
