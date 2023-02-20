@@ -6,7 +6,6 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>X</title>
   <link rel="stylesheet" type="text/css" href="" />
-  <script src="index.js"> </script>
   <script src="./ObjetsFixes/briques.js"> </script>
   <script src="./ObjetsFixes/echelle.js"> </script>
   <script src="./ObjetsFixes/beton.js"> </script>
@@ -14,84 +13,232 @@
   <script src="./ObjetsFixes/corde.js"> </script>
   <script src="./ObjetsFixes/cellule.js"> </script>
   <script src="echelleNiveau.js"> </script>
-  <script src="lodeRunner.js"> </script>
-  <script src="lodeRunner.js"> </script>
   <script src="jeuPrincipal.js"> </script>
   <script src="placementElementsFixes.js"> </script>
   <script src="lodeRunner.js"> </script>
+  <script src="chronometre.js"> </script>
 
-
-  
   <script type="text/javascript">
-    //allo
     //créer un tableau d'objet
     var objCanvas = null;
     var objC2D = null;
     var objCycleAnimation = null;
 
-    var objImgBrique = null;
-    var objImgBeton = null;
-    var objImgEchelle = null;
-    var objImgLingot = null;
-    var objImgCorde = null;
+    var intMsEcoulees = 0;
+    var tabObjMurs = null;
+    var intHauteur = 0;
+    var intLargeur = 0;
     var brique = null;
     var beton = null;
     var echelle = null;
     var lingot = null;
     var corde = null;
     var lodeRunner = null;
-    var x = 0;
+    var intScore = '0000000';
+    var strTemps = '00:00';
+    var strNiveau = '1';
+    var intVie = 5;
+
 
     function initAnimation() {
       objCanvas = document.getElementById('monCanvas');
       objCanvas.focus();
       objC2D = objCanvas.getContext('2d');
-      objImgBrique = new Image();
-      objImgBeton = new Image();
-      objImgCorde  = new Image();
-      objImgLingot  = new Image();
-      objImgEchelle  = new Image();
+
       brique = new Brique();
       beton = new Beton();
       echelle = new Echelle();
       lingot = new Lingot();
       corde = new Corde();
       lodeRunner = new Runner();
+      intHauteur = objCanvas.height / 23;
+      intLargeur = objCanvas.width / 30;
 
-      initCanvas(objC2D);
-      initTableau(objC2D);
-      initBrique(objImgBrique);
-      initBeton(objImgBeton);
-      initEchelle(objImgEchelle);
-      initLingot(objImgLingot);
-      initCorde(objImgCorde)
+      initTabChar(tabInitial)
+      initBrique();
+      initBeton();
+      initEchelle();
+      initLingot();
+      initCorde();
+      initMurs();
       dessiner();
+      animer();
 
     }
 
 
-    function dessiner() {
-      brique.dessinerBrique(objC2D, objImgBrique);
-      beton.dessinerBeton(objC2D, objImgBeton);
-      echelle.dessinerEchelle(objC2D, objImgEchelle);
-      lingot.dessinerLingot(objC2D, objImgLingot);
-      corde.dessinerCorde(objC2D, objImgCorde);
-      lodeRunner.dessinerLodeRunner(objC2D);
-      //petites composantes dans fichier js
+    function initMurs() {
+      tabObjMurs = new Array();
+      var objMur = null;
 
+      // Le mur de gauche (#0)
+      objMur = new Object();
+      objMur.intXDebut = 0;
+      objMur.intYDebut = 0;
+      objMur.intXFin = Math.floor(objCanvas.width / 30);
+      objMur.intYFin = objCanvas.height
+      objMur.strCouleur = '#FFD700';
+      tabObjMurs.push(objMur);
+
+      // Le mur du centre (en haut) (#1)
+      objMur = new Object();
+      objMur.intXDebut = Math.floor(objCanvas.width / 30);
+      objMur.intYDebut = 0;
+      objMur.intXFin = objCanvas.width - Math.floor(objCanvas.width / 30);
+      objMur.intYFin = Math.floor(objCanvas.width / 30);
+      objMur.strCouleur = '#FFD700';
+      tabObjMurs.push(objMur);
+
+      // Le mur de droite (#2)
+      objMur = new Object();
+      objMur.intXDebut = objCanvas.width;
+      objMur.intYDebut = 0;
+      objMur.intXFin = objCanvas.width - Math.floor(objCanvas.width / 30);
+      objMur.intYFin = objCanvas.height;
+      objMur.strCouleur = '#FFD700';
+      tabObjMurs.push(objMur);
+
+      // Le mur du centre (en bas) (#3)
+      objMur = new Object();
+      objMur.intXDebut = Math.floor(objCanvas.width / 30);
+      objMur.intYDebut = objCanvas.height - Math.floor(objCanvas.width / 30);
+      objMur.intXFin = objCanvas.width - Math.floor(objCanvas.width / 30);
+      objMur.intYFin = objCanvas.height;
+      objMur.strCouleur = '#FFD700';
+      tabObjMurs.push(objMur);
     }
-
 
     function initSons() {
 
     }
-
-    function animer() {
+    function dessiner() {
+      dessinerFond();
+      dessinerMurs();
+      dessinerInfo();
+      brique.dessinerBrique(objC2D);
+      beton.dessinerBeton(objC2D);
+      echelle.dessinerEchelle(objC2D);
+      lingot.dessinerLingot(objC2D);
+      corde.dessinerCorde(objC2D);
+      lodeRunner.dessinerLodeRunner(objC2D);
+      // dessinerGrillage();
+      //petites composantes dans fichier js
 
     }
 
-    function mettreAJourAnimation() {
+    function dessinerInfo() {
+      objC2D.save();
 
+      objC2D.translate(intLargeur * 6, objCanvas.height - (intHauteur * 4));
+
+      objC2D.fillStyle = '#FFD700';
+      objC2D.lineWidth = 2;
+      objC2D.font = '30pt Impact';
+      objC2D.textAlign = 'center';
+      objC2D.textBaseline = 'middle';
+      objC2D.fillText("Score : " + intScore, 2, Math.floor(objCanvas.height / 32));
+
+      objC2D.fillStyle = 'green';
+      objC2D.lineWidth = 2;
+      objC2D.font = '30pt Impact';
+      objC2D.textAlign = 'center';
+      objC2D.textBaseline = 'middle';
+      objC2D.fillText("Temps : " + strTemps, intLargeur * 7.5, Math.floor(objCanvas.height / 32));
+
+      objC2D.fillStyle = '#FFD700';
+      objC2D.lineWidth = 2;
+      objC2D.font = '30pt Impact';
+      objC2D.textAlign = 'center';
+      objC2D.textBaseline = 'middle';
+      objC2D.fillText("Niveau : " + strNiveau, intLargeur * 14, Math.floor(objCanvas.height / 32));
+
+      objC2D.strokeStyle = 'white';
+      objC2D.fillStyle = 'red';
+      objC2D.lineWidth = 2;
+      objC2D.font = '30pt Impact';
+      objC2D.textAlign = 'center';
+      objC2D.textBaseline = 'middle';
+      objC2D.fillText("Vies : " + intVie, intLargeur * 19, Math.floor(objCanvas.height / 32));
+
+      objC2D.restore();
+    }
+
+    function dessinerGrillage() {
+      objC2D.save();
+      objC2D.strokeStyle = 'white';
+      for (var i = intHauteur; i < objCanvas.width; i += intHauteur) {
+        objC2D.moveTo(0, i);
+        objC2D.lineTo(objCanvas.width, i);
+      }
+
+      for (var i = intLargeur; i < objCanvas.width; i += intLargeur) {
+        objC2D.moveTo(i, 0);
+        objC2D.lineTo(i, objCanvas.height);
+      }
+      objC2D.stroke();
+
+      objC2D.restore();
+    }
+
+    function dessinerFond() {
+      objC2D.beginPath();
+      objC2D.fillStyle = 'black';
+      objC2D.fillRect(0, 0, objCanvas.width, objCanvas.height);
+      objC2D.closePath();
+    }
+
+    // Pour dessiner les murs
+    function dessinerMurs() {
+      objC2D.save();
+      objC2D.globalAlpha = 0.8; // Petite transparence
+
+      for (var intNoMur = 0; intNoMur < tabObjMurs.length; intNoMur++) {
+        var objMur = tabObjMurs[intNoMur];
+
+        var intCentreX = (objMur.intXDebut + objMur.intXFin) / 2;
+        var intCentreY = (objMur.intYDebut + objMur.intYFin) / 2;
+        var intRayon = (intNoMur == 1) ? Math.abs(objMur.intXFin - objMur.intXDebut) / 2
+          : Math.abs(objMur.intYFin - objMur.intYDebut) / 2;
+
+        objC2D.fillStyle = objMur.strCouleur;
+
+        // Le dessin du mur
+        objC2D.beginPath();
+        objC2D.moveTo(objMur.intXDebut, objMur.intYDebut);
+        objC2D.lineTo(objMur.intXFin, objMur.intYDebut);
+        objC2D.lineTo(objMur.intXFin, objMur.intYFin);
+        objC2D.lineTo(objMur.intXDebut, objMur.intYFin);
+        objC2D.closePath();
+        objC2D.fill();
+      }
+
+      objC2D.strokeStyle = 'black';
+      objC2D.lineWidth = 2;
+      objC2D.font = '22pt Impact';
+      objC2D.textAlign = 'center';
+      objC2D.textBaseline = 'middle';
+      objC2D.strokeText("Lode Runner", objCanvas.width / 2, Math.floor(objCanvas.height / 32));
+
+      objC2D.strokeStyle = 'black';
+      objC2D.lineWidth = 2;
+      objC2D.font = '22pt Impact';
+      objC2D.textAlign = 'center';
+      objC2D.textBaseline = 'middle';
+      objC2D.strokeText("par Ghilyane Henri et Alexander Horga", objCanvas.width / 2, objCanvas.height - Math.floor(objCanvas.height / 34));
+
+      objC2D.restore();
+    }
+
+    function animer() {
+      objCycleAnimation = requestAnimationFrame(animer);
+      effacerDessin();
+      mettreAJourAnimation();
+      dessiner();
+    }
+
+    function mettreAJourAnimation() {
+      mettreAjourChrono();
+      miseAJourLode();
     }
 
     // Arrêter l'animation
@@ -114,7 +261,8 @@
 
 <body onload="initAnimation()">
   <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
-  <canvas id="monCanvas" width="1300" height="646" tabindex="1" onkeydown="gererDeplacementRunner()"> </canvas>
+  <canvas id="monCanvas" width="1100" height="700" tabindex="1" onmousedown="demarrer(event)"
+    onkeydown="lodeRunner.gererDeplacementRunner()"> </canvas>
   <script>
   </script>
 </body>

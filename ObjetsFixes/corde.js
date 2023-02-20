@@ -1,32 +1,25 @@
-function Corde(intHauteur, intLargeur) {
-    this.intHauteur = intHauteur;
-    this.intLargeur = intLargeur;
-    this.binTroue = false;
+var objImgCorde = null;
+
+function Corde() {
 }
 
-
-
-function initCorde(objImgCorde) {
+function initCorde() {
+    objImgCorde = new Image();
     objImgCorde.src = './Images/corde.png';
 }
 
 
-Corde.prototype.dessinerCorde = function (objC2D, objImgCorde) {
+Corde.prototype.dessinerCorde = function (objC2D) {
     objC2D.save();
 
-    var tabElements = creerTabChar(tabInitial);
-    this.intHauteur = objCanvas.height / 17;
-    this.intLargeur = objCanvas.width / 28;
-    
-    for (var i = 0; i < tabElements.length; i++) {
-        for (var j = 0; j < tabElements[0].length; j++) {
-            if (tabElements[i][j] == "4") {
-                // console.log(2) 
-                // console.log(typeof objImgCorde);
-                objC2D.drawImage(objImgCorde, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
+    objC2D.translate(intLargeur, intHauteur);
+
+    for (var i = 0; i < tabChar.length; i++) {
+        for (var j = 0; j < tabChar[0].length; j++) {
+            if (tabChar[i][j] == "4") {
+                objC2D.drawImage(objImgCorde, j * intLargeur, i* intHauteur, intLargeur, intHauteur);
             }
         }
     }
-
     objC2D.restore();
 }

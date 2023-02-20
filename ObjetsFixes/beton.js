@@ -1,32 +1,25 @@
-function Beton(intHauteur, intLargeur) {
-    this.intHauteur = intHauteur;
-    this.intLargeur = intLargeur;
-    this.binTroue = false;
+var objImgBeton = null;
+function Beton() {
 }
-
 
 //pas obligatoire pour certains
 function initBeton() {
-    objImgBeton.src = './Images/béton.jpg';
+    objImgBeton = new Image();
+    objImgBeton.src = './Images/beton.jpg';
 }
 
 Beton.prototype.dessinerBeton = function(objC2D) {
-
     objC2D.save();
 
-    tabElements = creerTabChar(tabInitial);
-
-    this.intHauteur = objCanvas.height / 17;
-    this.intLargeur = objCanvas.width / 28;
-
-    for (var i = 0; i < tabElements.length; i++) {
-        for (var j = 0; j < tabElements[0].length; j++) {
-            if (tabElements[i][j] == "5") {
-                objC2D.drawImage(objImgBeton, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
+    objC2D.translate(intLargeur, intHauteur);
+    
+    for (var i = 0; i < tabChar.length; i++) {
+        for (var j = 0; j < tabChar[0].length; j++) {
+            if (tabChar[i][j] == "5") {
+                objC2D.drawImage(objImgBeton, j*intLargeur, i*intHauteur, intLargeur, intHauteur);
             }
         }
     }
 
     objC2D.restore();
-
 }

@@ -1,40 +1,22 @@
-// function Lingot(){
+var objImgLingot = null;
 
-//     let objLingot = new Object()
-//     objLingot.X = 0
-//     objLingot.Y = 0
-//     objLingot.intLargeur = 5
-//     objLingot.intHauteur = 3 
-//     objLingot.binRamasser = false
-
-//     return objLingot
-// }
-
-
-
-function Lingot(intHauteur, intLargeur) {
-    this.intHauteur = intHauteur;
-    this.intLargeur = intLargeur;
+function Lingot() {
 }
 
-function initLingot(objImgLingot) {
+function initLingot() {
+    objImgLingot = new Image();
     objImgLingot.src = './Images/gold.jpg';
 }
 
 
 Lingot.prototype.dessinerLingot = function (objC2D) {
     objC2D.save();
-
-    var tabElements = creerTabChar(tabInitial);
-    this.intHauteur = objCanvas.height / 17;
-    this.intLargeur = objCanvas.width / 28;
+    objC2D.translate(intLargeur, intHauteur);
     
-    for (var i = 0; i < tabElements.length; i++) {
-        for (var j = 0; j < tabElements[0].length; j++) {
-            if (tabElements[i][j] == "2") {
-                // console.log(2) 
-                // console.log(typeof objImgLingot);
-                objC2D.drawImage(objImgLingot, j * this.intLargeur, i * this.intHauteur, objCanvas.width / 28, objCanvas.height / 17);
+    for (var i = 0; i < tabChar.length; i++) {
+        for (var j = 0; j < tabChar[0].length; j++) {
+            if (tabChar[i][j] == "2") {
+                    objC2D.drawImage(objImgLingot, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
             }
         }
     }
