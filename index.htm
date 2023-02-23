@@ -6,6 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>X</title>
   <link rel="stylesheet" type="text/css" href="" />
+  <script src="actionsLode.js"> </script>
   <script src="./ObjetsFixes/briques.js"> </script>
   <script src="./ObjetsFixes/echelle.js"> </script>
   <script src="./ObjetsFixes/beton.js"> </script>
@@ -15,7 +16,7 @@
   <script src="echelleNiveau.js"> </script>
   <script src="jeuPrincipal.js"> </script>
   <script src="placementElementsFixes.js"> </script>
-  <script src="lodeRunner.js"> </script>
+  <script src="lodeRunner2.js"> </script>
   <script src="chronometre.js"> </script>
 
   <script type="text/javascript">
@@ -49,9 +50,9 @@
       echelle = new Echelle();
       lingot = new Lingot();
       corde = new Corde();
-      lodeRunner = new Runner();
       intHauteur = objCanvas.height / 23;
       intLargeur = objCanvas.width / 30;
+      lodeRunner = new Runner();
 
       initTabChar(tabInitial)
       initBrique();
@@ -120,7 +121,7 @@
       lingot.dessinerLingot(objC2D);
       corde.dessinerCorde(objC2D);
       lodeRunner.dessinerLodeRunner(objC2D);
-      // dessinerGrillage();
+      dessinerGrillage();
       //petites composantes dans fichier js
 
     }
@@ -132,29 +133,23 @@
 
       objC2D.fillStyle = '#FFD700';
       objC2D.lineWidth = 2;
-      objC2D.font = '30pt Impact';
+      objC2D.font = objCanvas.width/35+ 'pt Impact';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
       objC2D.fillText("Score : " + intScore, 2, Math.floor(objCanvas.height / 32));
 
       objC2D.fillStyle = 'green';
-      objC2D.lineWidth = 2;
-      objC2D.font = '30pt Impact';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
       objC2D.fillText("Temps : " + strTemps, intLargeur*7.5, Math.floor(objCanvas.height / 32));
 
       objC2D.fillStyle = '#FFD700';
-      objC2D.lineWidth = 2;
-      objC2D.font = '30pt Impact';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
       objC2D.fillText("Niveau : " + strNiveau, intLargeur*14, Math.floor(objCanvas.height / 32));
 
       objC2D.strokeStyle = 'white';
       objC2D.fillStyle = 'red';
-      objC2D.lineWidth = 2;
-      objC2D.font = '30pt Impact';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
       objC2D.fillText("Vies : " + intVie, intLargeur*19, Math.floor(objCanvas.height / 32));
@@ -213,7 +208,7 @@
 
       objC2D.strokeStyle = 'black';
       objC2D.lineWidth = 2;
-      objC2D.font = '22pt Impact';
+      objC2D.font = objCanvas.width/35+'pt Impact';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
       objC2D.strokeText("Lode Runner", objCanvas.width / 2, Math.floor(objCanvas.height / 32));
@@ -260,7 +255,7 @@
 
 <body onload="initAnimation()">
   <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
-  <canvas id="monCanvas" width="1100" height="700" tabindex="1" onmousedown="demarrer(event)" onkeydown="lodeRunner.gererDeplacementRunner()"> </canvas>
+  <canvas id="monCanvas" width="800" height="600" tabindex="1" onmousedown="demarrer(event)" onkeydown="lodeRunner.gererDeplacementRunner()"> </canvas>
   <script>
   </script>
 </body>

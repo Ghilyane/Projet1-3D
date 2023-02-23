@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>X</title>
+    <link rel="stylesheet" type="text/css" href="" />
+    <script src="actionsLode.js"> </script>
+
+    <script type="text/javascript">
+        //créer un tableau d'objet
+        var objCanvas = null;
+        var objC2D = null;
+        var objCycleAnimation = null;
+        var lodeRunner = null;
+
+
+        function initAnimation() {
+            objCanvas = document.getElementById('monCanvas');
+            objCanvas.focus();
+            objC2D = objCanvas.getContext('2d');
+
+            dessiner();
+            animer();
+
+        }
+
+        function dessiner() {
+            objC2D.fillStyle = "beige";
+            objC2D.fillRect(0, 0, objCanvas.width, objCanvas.height);
+            var intMultiple = 600;
+            objC2D.save();
+            objC2D.translate(objCanvas.width/2, objCanvas.height/2);
+            objC2D.scale(intMultiple, intMultiple);
+            
+            objC2D.save();
+            objC2D.beginPath();
+            objC2D.fillStyle = 'blue';
+            objC2D.fillRect(-0.325, -0.45, 0.65, 0.9);
+            // objC2D.fillRect(this.intX, intHauteur*15, this.intLargeur, intHauteur);
+            objC2D.restore();
+            dessinerLodeR();
+            objC2D.restore();
+        }
+
+        function animer() {
+            objCycleAnimation = requestAnimationFrame(animer);
+            effacerDessin();
+            mettreAJourAnimation();
+            dessiner();
+        }
+
+        function mettreAJourAnimation() {
+        }
+
+        // Arrêter l'animation
+        function arreterAnimation() {
+            if (objCycleAnimation != null)
+                cancelAnimationFrame(objCycleAnimation);
+            objCycleAnimation = null;
+        }
+
+        // Pour effacer le dessin
+        function effacerDessin() {
+            objC2D.clearRect(0, 0, objCanvas.width, objCanvas.height);
+        }
+
+
+
+    </script>
+
+</head>
+
+<body onload="initAnimation()">
+    <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
+    <canvas id="monCanvas" width="800" height="600" tabindex="1"> </canvas>
+    <script>
+    </script>
+</body>
+
+</html>

@@ -1,22 +1,19 @@
 
-function Runner(intHauteur, intLargeur) {
-    this.intHauteur = intHauteur;
-    this.intLargeur = intLargeur;
+function Runner() {
+    this.intHauteur = intHauteur*0.90;
+    this.intLargeur = intLargeur*0.65;
     this.intX = objCanvas.width / 2;
-    this.intY = (objCanvas.height/8)*5;
-    this.deplX = objCanvas.width / 2;
-    this.deplY = (objCanvas.height/8)*5
-    this.intPied = this.intX + this.intHauteur;
-    this.intGauche = this.intLargeur - this.intX;
+    this.intY = intHauteur*16 - this.intHauteur/2;
+    // this.deplX = this.intX;
+    // this.deplY = this.intY;
+
     this.fltXVitesse = 0; //constante
     this.fltYTomber = 0; // constante 
-    this.fltYMonter = 0; //constante - plus rapide que tomber
+    this.fltYMonter = 3; //constante - plus rapide que tomber
     this.intDirection = 1
     this.intVitesse = 5;
     this.binDeplacableX = false;
     this.binDeplacableY = false;
-
-
     //ne pas se déplacer avec intX, intY, mais avex deplX, deplY
     //dans init donner : deplX = intX, deplY = intY
 }
@@ -27,14 +24,12 @@ function Runner(intHauteur, intLargeur) {
 
 Runner.prototype.dessinerLodeRunner = function (objC2D) {
     objC2D.save();
-
-    // console.log("X : " + this.intX + " Y : " + this.intY)
-    this.intHauteur = 50;
-    this.intLargeur = 25;
+    objC2D.translate(this.intX, this.intY)
+    objC2D.scale(intLargeur, intHauteur);
     objC2D.beginPath();
     objC2D.fillStyle = 'blue';
-    objC2D.fillRect(this.intX, this.intY, this.intLargeur, this.intHauteur);
-    // objC2D.fillRect(this.intX, intHauteur*15, this.intLargeur, intHauteur);
+    objC2D.fillRect(-this.intLargeur/intLargeur/2, -this.intHauteur/intHauteur/2, this.intLargeur/intLargeur, this.intHauteur/intHauteur);
+    // Créer la régulation des mouvements
     objC2D.restore();
 }
 
@@ -46,6 +41,7 @@ function miseAJourLode() {
     // }
 }
 
+//collisions des bordures
 Runner.prototype.gererDeplacementRunner = function() {
     switch (event.keyCode) {
         //37 - gauche
@@ -57,40 +53,39 @@ Runner.prototype.gererDeplacementRunner = function() {
             var objMur = tabObjMurs[0];
             this.intDirection = -1;
             this.binDeplacableY = false;
-            this.binDeplacableX = (this.intX - (2*this.intVitesse)/5) >= objMur.intXFin
+            this.binDeplacableX = (this.intX - this.intLargeur/2 - this.intVitesse) >= objMur.intXFin
             break;
         case 38:
             var objMur = tabObjMurs[1];
             this.intDirection = -1;
             this.binDeplacableX = false;
-            this.binDeplacableY =  (this.intY - this.intVitesse) >= objMur.intYFin
+            this.binDeplacableY =  (this.intY - this.intHauteur/2 -this.fltYMonter) >= objMur.intYFin
             break;
         case 39:
             var objMur = tabObjMurs[2];
             this.intDirection = 1;
             this.binDeplacableY = false;
-            this.binDeplacableX = (this.intX + (2*this.intVitesse)/5 + this.intLargeur + (objMur.intXDebut - objMur.intXFin)) <= objMur.intXDebut
+            this.binDeplacableX =  (this.intX + this.intLargeur/2 + this.intVitesse)  <= objMur.intXFin
         break;
         case 40:
             var objMur = tabObjMurs[3];
             this.intDirection = 1;
             this.binDeplacableX = false;
-            this.binDeplacableY =  (this.intY +  this.intVitesse + (10*this.intHauteur)/2.25) <= objMur.intYDebut
+            this.binDeplacableY =  (this.intY + this.intHauteur/2 + this.fltYMonter + intHauteur*5) <= objMur.intYDebut
+            
             break;
     }
 
     if (this.binDeplacableX && !this.binDeplacableY){
         this.intX += this.intVitesse * this.intDirection
-        console.log(2)
     }
 
     if (this.binDeplacableY && !this.binDeplacableX) {
-        this.intY += this.intVitesse * this.intDirection
-        console.log(3)
+        this.intY += this.fltYMonter * this.intDirection
     }
 
 
-    console.log("X : " + this.binDeplacableX + " Y : " + this.binDeplacableY)
+    // console.log("X : " + this.binDeplacableX + " Y : " + this.binDeplacableY)
 
 }
 

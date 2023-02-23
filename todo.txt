@@ -1,20 +1,9 @@
 Initialisation
-
-- initImageFond();
-- initMurs();
 - initSons();
 - initLodeRunner();
 - initGardes();
-- initLingots();
 
 Dessiner
-- dessinerMur();
-- dessinerFond();
-- dessinerBrique();
-- dessinnerEchelle();
-- desinnerLingots();
-
-- dessinerTrous();
 - dessinerLodeRunner();
 	-> qui marche (environ 4 images différentes)
 	-> qui est statique
@@ -22,7 +11,6 @@ Dessiner
 
 
 Tester collisions
-
 - binCollMurs
 - binCollBriques
 
