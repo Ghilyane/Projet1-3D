@@ -40,6 +40,7 @@
     var strNiveau = '1';
     var intVie = 5;
 
+
     function initAnimation() {
       objCanvas = document.getElementById('monCanvas');
       objCanvas.focus();
@@ -129,7 +130,7 @@
     function dessinerInfo() {
       objC2D.save();
 
-      objC2D.translate(intLargeur*6, objCanvas.height - (intHauteur*4));
+      objC2D.translate(intLargeur * 6, objCanvas.height - (intHauteur * 4));
 
       objC2D.fillStyle = '#FFD700';
       objC2D.lineWidth = 2;
@@ -141,18 +142,18 @@
       objC2D.fillStyle = 'green';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
-      objC2D.fillText("Temps : " + strTemps, intLargeur*7.5, Math.floor(objCanvas.height / 32));
+      objC2D.fillText("Temps : " + strTemps, intLargeur * 7.5, Math.floor(objCanvas.height / 32));
 
       objC2D.fillStyle = '#FFD700';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
-      objC2D.fillText("Niveau : " + strNiveau, intLargeur*14, Math.floor(objCanvas.height / 32));
+      objC2D.fillText("Niveau : " + strNiveau, intLargeur * 14, Math.floor(objCanvas.height / 32));
 
       objC2D.strokeStyle = 'white';
       objC2D.fillStyle = 'red';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
-      objC2D.fillText("Vies : " + intVie, intLargeur*19, Math.floor(objCanvas.height / 32));
+      objC2D.fillText("Vies : " + intVie, intLargeur * 19, Math.floor(objCanvas.height / 32));
 
       objC2D.restore();
     }
@@ -255,7 +256,12 @@
 
 <body onload="initAnimation()">
   <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
+<<<<<<< HEAD
   <canvas id="monCanvas" width="800" height="600" tabindex="1" onmousedown="demarrer(event)" onkeydown="lodeRunner.gererDeplacementRunner()"> </canvas>
+=======
+  <canvas id="monCanvas" width="1100" height="700" tabindex="1" onmousedown="demarrer(event)"
+    onkeydown="lodeRunner.gererDeplacementRunner()"> </canvas>
+>>>>>>> e1c0fdde00012bf4544fbde7ecb6bba67405501c
   <script>
   </script>
 </body>
