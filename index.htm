@@ -16,7 +16,8 @@
   <script src="echelleNiveau.js"> </script>
   <script src="jeuPrincipal.js"> </script>
   <script src="placementElementsFixes.js"> </script>
-  <script src="lodeRunner2.js"> </script>
+  <!-- <script src="lodeRunner2.js"> </script> -->
+  <script src="lodeRunner.js"> </script>
   <script src="chronometre.js"> </script>
 
   <script type="text/javascript">
@@ -53,7 +54,8 @@
       corde = new Corde();
       intHauteur = objCanvas.height / 23;
       intLargeur = objCanvas.width / 30;
-      lodeRunner = new Runner();
+      
+      lodeRunner = new Runner(intHauteur, intLargeur);
 
       initTabChar(tabInitial)
       initBrique();
@@ -124,6 +126,7 @@
       lodeRunner.dessinerLodeRunner(objC2D);
       dessinerGrillage();
       //petites composantes dans fichier js
+
 
     }
 
@@ -256,12 +259,7 @@
 
 <body onload="initAnimation()">
   <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
-<<<<<<< HEAD
   <canvas id="monCanvas" width="800" height="600" tabindex="1" onmousedown="demarrer(event)" onkeydown="lodeRunner.gererDeplacementRunner()"> </canvas>
-=======
-  <canvas id="monCanvas" width="1100" height="700" tabindex="1" onmousedown="demarrer(event)"
-    onkeydown="lodeRunner.gererDeplacementRunner()"> </canvas>
->>>>>>> e1c0fdde00012bf4544fbde7ecb6bba67405501c
   <script>
   </script>
 </body>
