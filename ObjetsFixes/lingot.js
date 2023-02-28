@@ -17,7 +17,7 @@ Lingot.prototype.dessinerLingot = function (objC2D) {
     for (var i = 0; i < tabChar.length; i++) {
         for (var j = 0; j < tabChar[0].length; j++) {
             if (tabChar[i][j] == "2") {
-                    objC2D.drawImage(objImgLingot, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
+                objC2D.drawImage(objImgLingot, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
             }
         }
     }
@@ -27,7 +27,6 @@ Lingot.prototype.dessinerLingot = function (objC2D) {
 
 
 Lingot.prototype.mettreAJourLingot = function (objC2D) {
-
 
 
     //1 - Quand le lodeRunner est dans la même cellule qu'un lingot, faire disparaître le lodeRunner.

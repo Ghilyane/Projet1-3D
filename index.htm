@@ -16,7 +16,8 @@
   <script src="echelleNiveau.js"> </script>
   <script src="jeuPrincipal.js"> </script>
   <script src="placementElementsFixes.js"> </script>
-  <script src="lodeRunner2.js"> </script>
+  <!-- <script src="lodeRunner2.js"> </script> -->
+  <script src="lodeRunner.js"> </script>
   <script src="chronometre.js"> </script>
 
   <script type="text/javascript">
@@ -24,6 +25,7 @@
     var objCanvas = null;
     var objC2D = null;
     var objCycleAnimation = null;
+    var objSons = null;
 
     var intMsEcoulees = 0;
     var tabObjMurs = null;
@@ -53,7 +55,8 @@
       corde = new Corde();
       intHauteur = objCanvas.height / 23;
       intLargeur = objCanvas.width / 30;
-      lodeRunner = new Runner();
+
+      lodeRunner = new Runner(intHauteur, intLargeur);
 
       initTabChar(tabInitial)
       initBrique();
@@ -62,6 +65,7 @@
       initLingot();
       initCorde();
       initMurs();
+      initSons()
       dessiner();
       animer();
 
@@ -110,8 +114,65 @@
     }
 
     function initSons() {
+      objSons = new Object()
+
+      //lingot
+      var objSon = document.createElement('audio')
+      objSon.setAttribute('src', 'Sons/SonRamasseLingot.mp3')
+      objSon.load()
+      objSons.ramasseLingot = objSon
+
+      //Chute runner
+      var objSon = document.createElement('audio')
+      objSon.setAttribute('src', 'Sons/SonRunnerChute.mp3')
+      objSon.load()
+      objSons.runnerChute = objSon
+
+      //Creuse un trou
+      var objSon = document.createElement('audio')
+      objSon.setAttribute('src', 'Sons/SonCreuseTrou.mp3')
+      objSon.load()
+      objSons.creuseTrou = objSon
+
+      //Trou se remplit
+      var objSon = document.createElement('audio')
+      objSon.setAttribute('src', 'Sons/SonBrickRemplis.mp3')
+      objSon.load()
+      objSons.remplitTrou = objSon
+
+      //Runner perd une vie
+      var objSon = document.createElement('audio')
+      objSon.setAttribute('src', 'Sons/SonRunnerMeurt.mp3')
+      objSon.load()
+      objSons.runnerMeurt = objSon
+
+      //Runner perd tous ses vies
+      var objSon = document.createElement('audio')
+      objSon.setAttribute('src', 'Sons/SonGameOver.mp3')
+      objSon.load()
+      objSons.gameOver = objSon
+
+      //Runner termine un niveau
+      var objSon = document.createElement('audio')
+      objSon.setAttribute('src', 'Sons/SonTermineNiveau.mp3')
+      objSon.load()
+      objSons.niveauComplete = objSon
+
+      //Garde tombe dans un trou
+      var objSon = document.createElement('audio')
+      objSon.setAttribute('src', 'Sons/SonGardeTombeDansTrou.mp3')
+      objSon.load()
+      objSons.gardeTombeDansTrou = objSon
+
+      //Garde meurt
+      var objSon = document.createElement('audio')
+      objSon.setAttribute('src', 'Sons/SonGardeMeurt.mp3')
+      objSon.load()
+      objSons.gardeMeurt = objSon
 
     }
+
+
     function dessiner() {
       dessinerFond();
       dessinerMurs();
@@ -125,6 +186,7 @@
       dessinerGrillage();
       //petites composantes dans fichier js
 
+
     }
 
     function dessinerInfo() {
@@ -134,7 +196,7 @@
 
       objC2D.fillStyle = '#FFD700';
       objC2D.lineWidth = 2;
-      objC2D.font = objCanvas.width/35+ 'pt Impact';
+      objC2D.font = objCanvas.width / 35 + 'pt Impact';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
       objC2D.fillText("Score : " + intScore, 2, Math.floor(objCanvas.height / 32));
@@ -209,7 +271,7 @@
 
       objC2D.strokeStyle = 'black';
       objC2D.lineWidth = 2;
-      objC2D.font = objCanvas.width/35+'pt Impact';
+      objC2D.font = objCanvas.width / 35 + 'pt Impact';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
       objC2D.strokeText("Lode Runner", objCanvas.width / 2, Math.floor(objCanvas.height / 32));
