@@ -1,5 +1,4 @@
 Initialisation
-- initSons();
 - initLodeRunner();
 - initGardes();
 
@@ -11,12 +10,14 @@ Dessiner
 
 
 Tester collisions
-- binCollMurs
 - binCollBriques
-
+---> Tester les trous
 
 Mise à jour
 - deplacementLodeRunner();
 - deplacementGarde();
 	-> sur briques, en chute, sur les échelles
 - deplacement
+
+
+Algorithme pour les gardes

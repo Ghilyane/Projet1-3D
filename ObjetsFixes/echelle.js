@@ -21,7 +21,6 @@ Echelle.prototype.dessinerEchelle = function (objC2D) {
                 objEchelle.intY = j
                 tabObjEchelles.push(objEchelle)
                 objC2D.drawImage(objImgEchelle, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
-
             }
         }
     }

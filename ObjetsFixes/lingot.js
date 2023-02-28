@@ -44,10 +44,7 @@ Lingot.prototype.mettreAJourLingot = function (objC2D) {
 
             a) Créer une méthode de type : quand le lodeRunner est dans la même cellule qu'un des six lingots.
                     ->créer un tableau de boolean;
-                Exemple : 
-                    var numeroPerguntas = 5;     
-                    var anyBoxesChecked = new Array(numeroPerguntas).fill(false);
-                    console.log(anyBoxesChecked);
+
 
             b) Si le lodeRunner se retrouve dans la même cellule qu'un lingot, parcourir le tableau de char et modifier 
             la valeur du lingot par un point
