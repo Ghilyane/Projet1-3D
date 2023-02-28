@@ -17,7 +17,7 @@ Echelle.prototype.dessinerEchelle = function (objC2D) {
             if (tabChar[i][j] == "3") {
                 objC2D.drawImage(objImgEchelle, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
                 objC2D.fillStyle = 'white'
-                objC2D.fillText(Math.floor((j * intLargeur) / 30) + ', ' + Math.floor((i * intHauteur) / 23) , j * intLargeur, i * intHauteur)
+                objC2D.fillText(j + ', ' + i , j * intLargeur, i * intHauteur)
             }
         }
     }
