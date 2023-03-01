@@ -1,49 +1,73 @@
+var intTest = 0;
+var intDessinRalentir = 0;
+var intGaucheOUDroite  = 0;
 
 function Runner(intHauteur, intLargeur) {
     this.intHauteur = intHauteur * 0.90;
     this.intLargeur = intLargeur * 0.65;
     this.intX = objCanvas.width / 2;
     this.intY = intHauteur * 16 - this.intHauteur / 2;
-    // this.deplX = this.intX;
-    // this.deplY = this.intY;
-
-    this.fltXVitesse = 0; //constante
-    this.fltYTomber = 0; // constante 
-    this.fltYMonter = 3; //constante - plus rapide que tomber
+    this.intTomber = 4; // constante 
+    this.intMonter = 3; //constante - plus rapide que tomber
     this.intDirection = 1
     this.intVitesse = 5;
     this.binDeplacableX = false;
     this.binDeplacableY = false;
-    //ne pas se déplacer avec intX, intY, mais avex deplX, deplY
-    //dans init donner : deplX = intX, deplY = intY
-    this.binMonter = false
+    this.binMonter = false;
+    this.binCourir = false;
+    this.binTraverserCorde = false;
 }
 
-//variables de temps
-// fltvitesse 
-// flt
 
 Runner.prototype.dessinerLodeRunner = function (objC2D) {
     objC2D.save();
     objC2D.translate(this.intX, this.intY)
     objC2D.scale(intLargeur, intHauteur);
     objC2D.beginPath();
-    objC2D.fillStyle = 'blue';
-    objC2D.fillRect(-this.intLargeur / intLargeur / 2, -this.intHauteur / intHauteur / 2, this.intLargeur / intLargeur, this.intHauteur / intHauteur);
+    // objC2D.fillStyle = 'blue';
+    // objC2D.fillRect(-this.intLargeur / intLargeur / 2, -this.intHauteur / intHauteur / 2, this.intLargeur / intLargeur, this.intHauteur / intHauteur);
 
-    objC2D.font = '1pt Arial'
+    // dessinerLodeR() //Créer boolean binCourir, binMonter, binTraverserCorde ===> Utiliser tout cela dans animation et non dans dessiner
+    if (intGaucheOUDroite == 0) {
+        objC2D.scale(1, 1);
+    }
+    else {
+        objC2D.scale(-1, 1);
+    }
+
+    if (this.binCourir) {
+        lodeAnimationCourir[intTest]('');
+    }
+    else if (!this.binCourir) {
+        lodeAnimationCourir[2]('');
+    }
+    else if (this.binMonter) {
+        lodeAnnimationMonter[intTest]('');
+    }
+
+    objC2D.fillStyle = 'blue';
+    objC2D.font = objCanvas.width / 1000 + 'pt Arial'
 
     objC2D.fillText(Math.floor(this.intX / intLargeur) - 1 + ', ' + (Math.floor(this.intY / intHauteur) - 1), -this.intLargeur / intLargeur / 2, -this.intHauteur / intHauteur / 2)
     // Créer la régulation des mouvements
     objC2D.restore();
 }
 
-function miseAJourLode() {
-    // intX++;
 
-    // if (intX >= objCanvas.width) {
-    //     intX = 0;
-    // }
+Runner.prototype.mettreAJourLode = function() {
+    intDessinRalentir++;
+
+    //Courir sur les briques
+    if (intDessinRalentir >=10 && this.binCourir) {
+        intDessinRalentir = 0
+        intTest = (intTest < lodeAnimationCourir.length -1) ? intTest+1 : 0;
+    }
+
+    //Monter les escaliers
+    if (intDessinRalentir >=8 && this.binMonter) {
+        intDessinRalentir = 0
+        intTest = (intTest < lodeAnnimationMonter.length -1) ? intTest+1 : 0;
+    }
 }
 
 let tabEchelles = new Array()
@@ -67,6 +91,9 @@ for (var i = 0; i < tabChar.length; i++) {
 let overlapX = false
 let overlapY = false
 
+Runner.prototype.gererImmobilite = function() {
+    this.binCourir = false;
+}
 
 
 Runner.prototype.collision = function () {
@@ -115,6 +142,8 @@ Runner.prototype.gererDeplacementRunner = function () {
         //39 - droite
         //40 - bas
         case 37:
+            intGaucheOUDroite = 1;
+            this.binCourir = true
             var objMur = tabObjMurs[0];
             this.intDirection = -1;
             this.binDeplacableY = false;
@@ -179,6 +208,8 @@ Runner.prototype.gererDeplacementRunner = function () {
 
             break;
         case 39:
+            intGaucheOUDroite = 0;
+            this.binCourir = true
             var objMur = tabObjMurs[2];
             this.intDirection = 1;
             this.binDeplacableY = false;

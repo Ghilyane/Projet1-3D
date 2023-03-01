@@ -3,9 +3,6 @@ Initialisation
 - initGardes();
 
 Dessiner
-- dessinerLodeRunner();
-	-> qui marche (environ 4 images différentes)
-	-> qui est statique
 - dessinerGardes();
 
 

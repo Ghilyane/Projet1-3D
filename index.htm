@@ -16,6 +16,7 @@
   <script src="echelleNiveau.js"> </script>
   <script src="jeuPrincipal.js"> </script>
   <script src="placementElementsFixes.js"> </script>
+  <script src="actionsLode.js"> </script>
   <!-- <script src="lodeRunner2.js"> </script> -->
   <script src="lodeRunner.js"> </script>
   <script src="chronometre.js"> </script>
@@ -183,10 +184,9 @@
       lingot.dessinerLingot(objC2D);
       corde.dessinerCorde(objC2D);
       lodeRunner.dessinerLodeRunner(objC2D);
+      // dessinerLodeR();
       dessinerGrillage();
       //petites composantes dans fichier js
-
-
     }
 
     function dessinerInfo() {
@@ -271,17 +271,17 @@
 
       objC2D.strokeStyle = 'black';
       objC2D.lineWidth = 2;
-      objC2D.font = objCanvas.width / 35 + 'pt Impact';
+      objC2D.font = objCanvas.width / 40 + 'pt Impact';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
-      objC2D.strokeText("Lode Runner", objCanvas.width / 2, Math.floor(objCanvas.height / 32));
+      objC2D.strokeText("Lode Runner", objCanvas.width / 2, Math.floor(objCanvas.height / 40));
 
       objC2D.strokeStyle = 'black';
       objC2D.lineWidth = 2;
-      objC2D.font = '22pt Impact';
+      objC2D.font = objCanvas.width / 40 + 'pt Impact';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
-      objC2D.strokeText("par Ghilyane Henri et Alexander Horga", objCanvas.width / 2, objCanvas.height - Math.floor(objCanvas.height / 34));
+      objC2D.strokeText("par Ghilyane Henri et Alexander Horga", objCanvas.width / 2, objCanvas.height - Math.floor(objCanvas.height / 40));
 
       objC2D.restore();
     }
@@ -295,7 +295,8 @@
 
     function mettreAJourAnimation() {
       mettreAjourChrono();
-      miseAJourLode();
+      lodeRunner.mettreAJourLode();
+      lingot.mettreAJourLingot();
     }
 
     // Arrêter l'animation
@@ -318,9 +319,8 @@
 
 <body onload="initAnimation()">
   <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
-  <canvas id="monCanvas" width="800" height="600" tabindex="1" onmousedown="demarrer(event)" onkeydown="lodeRunner.gererDeplacementRunner()"> </canvas>
-  <!-- <canvas id="monCanvas" width="1100" height="700" tabindex="1" onmousedown="demarrer(event)"
-  onkeydown="lodeRunner.gererDeplacementRunner()"> </canvas> -->
+  <canvas id="monCanvas" width="800" height="600" tabindex="1" onmousedown="demarrer(event)" 
+  onkeydown="lodeRunner.gererDeplacementRunner()" onkeyup="lodeRunner.gererImmobilite()"> </canvas>
   <script>
   </script>
 </body>

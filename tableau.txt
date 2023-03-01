@@ -1,7 +1,7 @@
 /*
 	. : Fond noir
 	1 : Briques
-	2 : or
+	2 : Lingot
 	3 : Échelles
 	4 : Corde
 	5 : Béton

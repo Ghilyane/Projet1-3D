@@ -1,3 +1,13 @@
+var lodeAnimationCourir = [
+    dessinerLodeCourt1, dessinerLodeCourt2, dessinerLodeCourt3, 
+    dessinerLodeCourt4, dessinerLodeCourt5, dessinerLodeCourt6
+];
+
+var lodeAnnimationMonter = [
+    dessinerLodeRMonte1, dessinerLodeRMonte2
+]
+
+
 function dessinerLodeR1() {
     //BASEEEEE
     
@@ -757,7 +767,7 @@ function dessinerLodeCourt1() {
       objC2D.restore();
 }
 
-function dessinerLoderCourt2() {
+function dessinerLodeCourt2() {
     objC2D.save();
       //La forme de la tête
       objC2D.translate(0.05, 0.075);
@@ -852,7 +862,7 @@ function dessinerLoderCourt2() {
       objC2D.restore();
 }
 
-function dessinerLoderCourt3() {
+function dessinerLodeCourt3() {
     objC2D.save();
       //La forme de la tête
       objC2D.translate(0.05, 0.075);
@@ -946,7 +956,7 @@ function dessinerLoderCourt3() {
       
       objC2D.restore();
 }
-function dessinerLoderCourt4() {
+function dessinerLodeCourt4() {
     objC2D.save();
     //La forme de la tête
     objC2D.translate(0.05, 0.075);
@@ -1038,7 +1048,7 @@ function dessinerLoderCourt4() {
     
     objC2D.restore();
 }
-function dessinerLoderCourt5() {
+function dessinerLodeCourt5() {
     objC2D.save();
     //La forme de la tête
     objC2D.translate(0.05, 0.11);
@@ -1134,7 +1144,7 @@ function dessinerLoderCourt5() {
     objC2D.restore();
 }
 
-function dessinerLoderCourt6() {
+function dessinerLodeCourt6() {
     objC2D.save();
       //La forme de la tête
       objC2D.translate(0.05, 0.075);
