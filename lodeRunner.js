@@ -207,7 +207,7 @@ Runner.prototype.gererDeplacementRunner = function () {
     }
 
     if (this.binDeplacableY && !this.binDeplacableX && binCollisionEchelle) {
-        this.intY += this.fltYMonter * this.intDirection
+        this.intY += this.intMonter * this.intDirection
     }
 
 
