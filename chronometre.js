@@ -22,14 +22,11 @@ function mettreAjourChrono() {
     objDateHeure1 = objDateHeure2;
 }
 
-function demarrer(e) {
-    if (e.button == 0 && !booStart) { //mise en marche du chronomètre
+function demarrer() {
+    if (!booStart) { //mise en marche du chronomètre
             booStart = true;
-        }
-        else if (e.button == 0 && booStart) { //mise en arrêt du chronomètre 
-            booStart = false;
-        }
-}
-
-function dessinerHorloge() {   
+    }
+        // else if (e.button == 0 && booStart) { //mise en arrêt du chronomètre 
+        //     booStart = false;
+        // }
 }

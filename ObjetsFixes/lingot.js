@@ -33,15 +33,15 @@ Lingot.prototype.dessinerLingot = function (objC2D) {
 
 Lingot.prototype.mettreAJourLingot = function () {
 
-    var posX = Math.floor(lodeRunner.intX / intLargeur) - 1
-    var posY = Math.floor(lodeRunner.intY / intHauteur) - 1
+    // var posX = Math.floor(lodeRunner.intX / intLargeur) - 1
+    // var posY = Math.floor(lodeRunner.intY / intHauteur) - 1
 
-    var binCollisionLingot = tabChar[posY][posX] == '2';
+    // var binCollisionLingot = tabChar[posY][posX] == '2';
 
-    if (binCollisionLingot) {
-        tabChar[posY][posX] = '.';
-        intNbLingot--;
-    }
+    // if (binCollisionLingot) {
+    //     tabChar[posY][posX] = '.';
+    //     intNbLingot--;
+    // }
 
 
 

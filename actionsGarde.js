@@ -1,14 +1,14 @@
-var lodeAnimationCourir = [
-    dessinerLodeCourt1, dessinerLodeCourt2, dessinerLodeCourt3, 
-    dessinerLodeCourt4, dessinerLodeCourt5, dessinerLodeCourt6
+var gardeAnimationCourir = [
+    dessinerGardeCourt1, dessinerGardeCourt2, dessinerGardeCourt3, 
+    dessinerGardeCourt4, dessinerGardeCourt5, dessinerGardeCourt6
 ];
 
-var lodeAnimationMonter = [
-    dessinerLodeRMonte1, dessinerLodeRMonte2
+var gardeAnimationMonter = [
+    dessinerGardeMonte1, dessinerGardeMonte2
 ]
 
 
-function dessinerLodeR1() {
+function dessinerGarde1() {
     //BASEEEEE
     
     objC2D.save();
@@ -30,15 +30,15 @@ function dessinerLodeR1() {
     
     objC2D.beginPath();
     //Tête
-    objC2D.fillStyle = "black";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(0,-0.35, 0.055, 0.07,0, 0, 2*Math.PI, true );
     objC2D.fill();
     //cou
-    objC2D.fillStyle = "red";
+    objC2D.fillStyle = "white";
     objC2D.beginPath();
     objC2D.fillRect(-0.024, -0.3, 0.048, 0.03)
     //épaules
-    objC2D.fillStyle = "green";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.105, -0.22);
     objC2D.lineTo(0.105, -0.22);
     objC2D.lineTo(0, -0.285);
@@ -118,14 +118,14 @@ function dessinerLodeR1() {
 
     objC2D.restore();
 }
-function dessinerLodeR() {
+function dessinerGarde() {
     objC2D.save();
     
     objC2D.translate(0, 0.075);
 
     //Jambe droite
     objC2D.beginPath();
-    objC2D.fillStyle = "gold";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(0.085, 0.015);
     objC2D.lineTo(0, 0.015);
     objC2D.lineTo(0.009, 0.15);
@@ -156,7 +156,7 @@ function dessinerLodeR() {
     
     //Bras droit (ellipse)
     objC2D.beginPath();
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(-0.12, -0.08, 0.03, 0.15, 11 * Math.PI/180, 0, 2 * Math.PI, true);
     objC2D.fill();
 
@@ -185,7 +185,7 @@ function dessinerLodeR() {
 
     //Haut du torse
     objC2D.beginPath();
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.1,-0.22);
     objC2D.lineTo(0.1,-0.22);
     objC2D.lineTo(0.08, -0.1);
@@ -207,12 +207,12 @@ function dessinerLodeR() {
     objC2D.fill();
 
     //cou
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.beginPath();
     objC2D.fillRect(-0.024, -0.3, 0.048, 0.03)
 
     //Tête
-    objC2D.fillStyle = "red";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(0,-0.35, 0.05, 0.07,0, 0, 2*Math.PI, true );
     objC2D.fill();
 
@@ -220,14 +220,14 @@ function dessinerLodeR() {
 
 }
 
-function dessinerLodeRTomber() {
+function dessinerGardeTomber() {
     objC2D.save();
     
     objC2D.translate(0, 0.045);
 
     //Jambe droite
     objC2D.beginPath();
-    objC2D.fillStyle = "gold";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(0.085, 0.015);
     objC2D.lineTo(0, 0.015);
     objC2D.lineTo(0.009, 0.15);
@@ -258,7 +258,7 @@ function dessinerLodeRTomber() {
     
     //Bras droit (ellipse)
     objC2D.beginPath();
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(-0.12, -0.08, 0.03, 0.15, 11 * Math.PI/180, 0, 2 * Math.PI, true);
     objC2D.fill();
 
@@ -287,7 +287,7 @@ function dessinerLodeRTomber() {
 
     //Haut du torse
     objC2D.beginPath();
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.1,-0.22);
     objC2D.lineTo(0.1,-0.22);
     objC2D.lineTo(0.08, -0.1);
@@ -309,12 +309,12 @@ function dessinerLodeRTomber() {
     objC2D.fill();
 
     //cou
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.beginPath();
     objC2D.fillRect(-0.024, -0.3, 0.048, 0.03)
 
     //Tête
-    objC2D.fillStyle = "red";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(0,-0.35, 0.05, 0.07,0, 0, 2*Math.PI, true );
     objC2D.fill();
 
@@ -322,7 +322,7 @@ function dessinerLodeRTomber() {
 
 }
 
-function dessinerLodeRCorde() {
+function dessinerGardeCorde() {
     objC2D.save();
     
     objC2D.translate(0, 0.075);
@@ -332,7 +332,7 @@ function dessinerLodeRCorde() {
 
     //Jambe droite
     objC2D.beginPath();
-    objC2D.fillStyle = "gold";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(0.085, 0.015);
     objC2D.lineTo(0, 0.015);
     objC2D.lineTo(0.08, 0.1);
@@ -379,7 +379,7 @@ function dessinerLodeRCorde() {
 
     //Jambe gauche
     objC2D.beginPath();
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.085, 0.015);
     objC2D.lineTo(-0, 0.015);
     objC2D.lineTo(-0.08, 0.1);
@@ -403,7 +403,7 @@ function dessinerLodeRCorde() {
 
     //Haut du torse
     objC2D.beginPath();
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.1,-0.22);
     objC2D.lineTo(0.1,-0.22);
     objC2D.lineTo(0.08, -0.1);
@@ -425,19 +425,19 @@ function dessinerLodeRCorde() {
     objC2D.fill();
 
     //cou
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.beginPath();
     objC2D.fillRect(-0.024, -0.3, 0.048, 0.03)
 
     //Tête
-    objC2D.fillStyle = "red";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(0,-0.35, 0.05, 0.07,0, 0, 2*Math.PI, true );
     objC2D.fill();
 
     objC2D.restore();
 }
 
-function dessinerLodeRMonte1() {
+function dessinerGardeMonte1() {
     objC2D.save();
     
     objC2D.translate(0, 0.075);
@@ -447,7 +447,7 @@ function dessinerLodeRMonte1() {
 
     //Jambe droite
     objC2D.beginPath();
-    objC2D.fillStyle = "gold";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(0.085, 0.015);
     objC2D.lineTo(0, 0.015);
     objC2D.lineTo(0.08, 0.1);
@@ -482,7 +482,7 @@ function dessinerLodeRMonte1() {
     
     //Bras gauche (ellipse)
     objC2D.beginPath();
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(-0.12, -0.15, 0.03, 0.08, 30 * Math.PI/180, 0, 2 * Math.PI, true);
     objC2D.fill();
 
@@ -518,7 +518,7 @@ function dessinerLodeRMonte1() {
 
     //Haut du torse
     objC2D.beginPath();
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.1,-0.22);
     objC2D.lineTo(0.1,-0.22);
     objC2D.lineTo(0.08, -0.1);
@@ -540,19 +540,19 @@ function dessinerLodeRMonte1() {
     objC2D.fill();
 
     //cou
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.beginPath();
     objC2D.fillRect(-0.024, -0.3, 0.048, 0.03)
 
     //Tête
-    objC2D.fillStyle = "red";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(0,-0.35, 0.05, 0.07,0, 0, 2*Math.PI, true );
     objC2D.fill();
 
     objC2D.restore();
 }
 
-function dessinerLodeRMonte2() {
+function dessinerGardeMonte2() {
     objC2D.save();
     
     objC2D.translate(0, 0.075);
@@ -562,7 +562,7 @@ function dessinerLodeRMonte2() {
 
     //Jambe droite
     objC2D.beginPath();
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "white";
     objC2D.lineWidth = "0.001"
     objC2D.moveTo(0.085, 0.015);
     objC2D.lineTo(0, 0.015);
@@ -588,7 +588,7 @@ function dessinerLodeRMonte2() {
     
     //Bras droit (ellipse)
     objC2D.beginPath();
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(0.12, -0.15, 0.03, 0.08, -30 * Math.PI/180, 0, 2 * Math.PI, true);
     objC2D.fill();
 
@@ -601,7 +601,7 @@ function dessinerLodeRMonte2() {
     
     //Bras gauche (ellipse)
     objC2D.beginPath();
-    objC2D.fillStyle = "gold";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(-0.14, -0.19, 0.03, 0.1, 80 * Math.PI/180, 0, 2 * Math.PI, true);
     objC2D.fill();
 
@@ -614,7 +614,7 @@ function dessinerLodeRMonte2() {
 
     //Jambe gauche
     objC2D.beginPath();
-    objC2D.fillStyle = "gold";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.085, 0.015);
     objC2D.lineTo(-0, 0.015);
     objC2D.lineTo(-0.08, 0.1);
@@ -638,7 +638,7 @@ function dessinerLodeRMonte2() {
 
     //Haut du torse
     objC2D.beginPath();
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.1,-0.22);
     objC2D.lineTo(0.1,-0.22);
     objC2D.lineTo(0.08, -0.1);
@@ -660,19 +660,19 @@ function dessinerLodeRMonte2() {
     objC2D.fill();
 
     //cou
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.beginPath();
     objC2D.fillRect(-0.024, -0.3, 0.048, 0.03)
 
     //Tête
-    objC2D.fillStyle = "red";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(0,-0.35, 0.05, 0.07,0, 0, 2*Math.PI, true );
     objC2D.fill();
 
     objC2D.restore();
 }
 
-function dessinerLodeCourt1() {
+function dessinerGardeCourt1() {
     objC2D.save();
       //La forme de la tête
       objC2D.translate(0.065, 0.075);
@@ -684,7 +684,7 @@ function dessinerLodeCourt1() {
       // objC2D.lineCap = "round";
       objC2D.lineWidth = "0.001"
       objC2D.beginPath();
-      objC2D.fillStyle = "gold";
+      objC2D.fillStyle = "white";
       objC2D.moveTo(-0.02, -0.005);
       objC2D.lineTo(-0.18, 0.17);
       objC2D.lineTo(-0.25, 0.16);
@@ -710,14 +710,14 @@ function dessinerLodeCourt1() {
 
       // torse
       objC2D.beginPath();
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(-0.04,-0.1, 0.06, 0.19, 15 * Math.PI/180, 0, 2 * Math.PI, true );
       objC2D.fill();
   
       
       //jambe droite
       objC2D.beginPath()
-      objC2D.fillStyle = "pink";
+      objC2D.fillStyle = "white";
       objC2D.moveTo(-0.1, 0.03);
       objC2D.lineTo(-0.015, 0.013);
       objC2D.lineTo(0.095,0.19);
@@ -734,19 +734,19 @@ function dessinerLodeCourt1() {
       
       //postérieur
       objC2D.beginPath()
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(-0.068,0.023, 0.05, 0.065, 10 * Math.PI/180, 0, 2 * Math.PI, true ); //changer pour moveTo/linwTo
       objC2D.fill();
 
       //cou
       objC2D.beginPath();
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.fillRect(-0.024, -0.3, 0.05, 0.03)
       
       //bras droit
       objC2D.beginPath();
       objC2D.srokeStyle = "black";
-      objC2D.fillStyle = "pink";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(-0.085, -0.17, 0.03, 0.1, 70 * Math.PI/180, 0, 2 * Math.PI, true);
       objC2D.fill();
       objC2D.stroke();
@@ -760,14 +760,14 @@ function dessinerLodeCourt1() {
      
       //Tête
       objC2D.beginPath();
-      objC2D.fillStyle = "red";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(0, -0.36, 0.05, 0.07, -11 * Math.PI/180, 0, 2 * Math.PI, true);
       objC2D.fill();
       
       objC2D.restore();
 }
 
-function dessinerLodeCourt2() {
+function dessinerGardeCourt2() {
     objC2D.save();
       //La forme de la tête
       objC2D.translate(0.05, 0.075);
@@ -779,7 +779,7 @@ function dessinerLodeCourt2() {
       // objC2D.lineCap = "round";
       objC2D.lineWidth = "0.001"
       objC2D.beginPath();
-      objC2D.fillStyle = "gold";
+      objC2D.fillStyle = "white";
       objC2D.moveTo(-0.02, -0.005);
       objC2D.lineTo(-0.1, 0.2);
       objC2D.lineTo(-0.17, 0.19);
@@ -805,14 +805,14 @@ function dessinerLodeCourt2() {
 
       // torse
       objC2D.beginPath();
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(-0.04,-0.1, 0.06, 0.19, 15 * Math.PI/180, 0, 2 * Math.PI, true );
       objC2D.fill();
   
       
       //jambe droite
       objC2D.beginPath()
-      objC2D.fillStyle = "pink";
+      objC2D.fillStyle = "white";
       objC2D.moveTo(-0.12, 0.03);
       objC2D.lineTo(-0.025, 0.04);
       objC2D.lineTo(0.08,0.19);
@@ -829,19 +829,19 @@ function dessinerLodeCourt2() {
       
       //postérieur
       objC2D.beginPath()
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(-0.075,0.03, 0.048, 0.06, 10 * Math.PI/180, 0, 2 * Math.PI, true ); //changer pour moveTo/linwTo
       objC2D.fill();
 
       //cou
       objC2D.beginPath();
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.fillRect(-0.024, -0.3, 0.05, 0.03)
       
       //bras droit
       objC2D.beginPath();
       objC2D.srokeStyle = "black";
-      objC2D.fillStyle = "pink";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(-0.07, -0.17, 0.03, 0.1, 60 * Math.PI/180, 0, 2 * Math.PI, true);
       objC2D.fill();
       objC2D.stroke();
@@ -855,14 +855,14 @@ function dessinerLodeCourt2() {
      
       //Tête
       objC2D.beginPath();
-      objC2D.fillStyle = "red";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(0, -0.36, 0.05, 0.07, -11 * Math.PI/180, 0, 2 * Math.PI, true);
       objC2D.fill();
       
       objC2D.restore();
 }
 
-function dessinerLodeCourt3() {
+function dessinerGardeCourt3() {
     objC2D.save();
       //La forme de la tête
       objC2D.translate(0.05, 0.075);
@@ -874,7 +874,7 @@ function dessinerLodeCourt3() {
       // objC2D.lineCap = "round";
       objC2D.lineWidth = "0.001"
       objC2D.beginPath();
-      objC2D.fillStyle = "gold";
+      objC2D.fillStyle = "white";
       objC2D.moveTo(-0.04, -0.005);
       objC2D.lineTo(0.11, 0.145);
       objC2D.lineTo(0.03, 0.15);
@@ -900,14 +900,14 @@ function dessinerLodeCourt3() {
   
       // torse
       objC2D.beginPath();
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(-0.04,-0.1, 0.06, 0.2, 15 * Math.PI/180, 0, 2 * Math.PI, true );
       objC2D.fill();
   
       
       //jambe droite
       objC2D.beginPath()
-      objC2D.fillStyle = "pink";
+      objC2D.fillStyle = "white";
       objC2D.moveTo(-0.12, 0.03);
       objC2D.lineTo(-0.025, 0.04);
       objC2D.lineTo(0.02,0.23);
@@ -924,19 +924,19 @@ function dessinerLodeCourt3() {
       
       //postérieur
       objC2D.beginPath()
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(-0.075,0.03, 0.048, 0.06, 10 * Math.PI/180, 0, 2 * Math.PI, true ); //changer pour moveTo/linwTo
       objC2D.fill();
 
       //cou
       objC2D.beginPath();
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.fillRect(-0.024, -0.3, 0.05, 0.03)
       
       //bras droit
       objC2D.beginPath();
       objC2D.srokeStyle = "black";
-      objC2D.fillStyle = "pink";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(0.03, -0.14, 0.03, 0.12, -2 * Math.PI/180, 0, 2 * Math.PI, true);
       objC2D.fill();
       objC2D.stroke();
@@ -950,13 +950,13 @@ function dessinerLodeCourt3() {
      
       //Tête
       objC2D.beginPath();
-      objC2D.fillStyle = "red";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(0, -0.36, 0.05, 0.07, -11 * Math.PI/180, 0, 2 * Math.PI, true);
       objC2D.fill();
       
       objC2D.restore();
 }
-function dessinerLodeCourt4() {
+function dessinerGardeCourt4() {
     objC2D.save();
     //La forme de la tête
     objC2D.translate(0.05, 0.075);
@@ -968,7 +968,7 @@ function dessinerLodeCourt4() {
     // objC2D.lineCap = "round";
     objC2D.lineWidth = "0.001"
     objC2D.beginPath();
-    objC2D.fillStyle = "gold";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.03, -0.005);
     objC2D.lineTo(0.12, 0.07);
     objC2D.lineTo(0.1, 0.12);
@@ -994,19 +994,19 @@ function dessinerLodeCourt4() {
 
     // torse
     objC2D.beginPath();
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(-0.04,-0.1, 0.055, 0.2, 15 * Math.PI/180, 0, 2 * Math.PI, true );
     objC2D.fill();
 
     //postérieur
     objC2D.beginPath()
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(-0.11,0.06, 0.02, 0.06, 15 * Math.PI/180, 0, 2 * Math.PI, true ); //changer pour moveTo/linwTo
     objC2D.fill();
 
     //jambe droite
     objC2D.beginPath()
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.12, 0.03);
     objC2D.lineTo(-0.045, 0.06);
     objC2D.lineTo(-0.1,0.21);
@@ -1022,13 +1022,13 @@ function dessinerLodeCourt4() {
     
     //cou
     objC2D.beginPath();
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.fillRect(-0.024, -0.3, 0.05, 0.03)
     
     //bras droit
     objC2D.beginPath();
     objC2D.srokeStyle = "black";
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(0.03, -0.14, 0.03, 0.12, -25 * Math.PI/180, 0, 2 * Math.PI, true);
     objC2D.fill();
     objC2D.stroke();
@@ -1042,13 +1042,13 @@ function dessinerLodeCourt4() {
    
     //Tête
     objC2D.beginPath();
-    objC2D.fillStyle = "red";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(0, -0.36, 0.05, 0.07, -11 * Math.PI/180, 0, 2 * Math.PI, true);
     objC2D.fill();
     
     objC2D.restore();
 }
-function dessinerLodeCourt5() {
+function dessinerGardeCourt5() {
     objC2D.save();
     //La forme de la tête
     objC2D.translate(0.05, 0.11);
@@ -1060,7 +1060,7 @@ function dessinerLodeCourt5() {
     // objC2D.lineCap = "round";
     objC2D.lineWidth = "0.001"
     objC2D.beginPath();
-    objC2D.fillStyle = "gold";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.035, -0.03);
     objC2D.lineTo(0.07, 0.19);
     objC2D.lineTo(0.03, 0.2);
@@ -1086,19 +1086,19 @@ function dessinerLodeCourt5() {
 
     // torse
     objC2D.beginPath();
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(-0.04,-0.1, 0.06, 0.2, 20 * Math.PI/180, 0, 2 * Math.PI, true );
     objC2D.fill();
 
     //postérieur
     objC2D.beginPath()
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(-0.11,0.06, 0.02, 0.06, 15 * Math.PI/180, 0, 2 * Math.PI, true ); //changer pour moveTo/linwTo
     objC2D.fill();
 
     //jambe droite
     objC2D.beginPath()
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(-0.13, 0.03);
     objC2D.lineTo(-0.06, 0.06);
     objC2D.lineTo(-0.12,0.22);
@@ -1116,12 +1116,12 @@ function dessinerLodeCourt5() {
     
     //cou
     objC2D.beginPath();
-    objC2D.fillStyle = "grey";
+    objC2D.fillStyle = "white";
     objC2D.fillRect(-0.003, -0.295, 0.05, 0.03)
     
     //bras droit
     objC2D.beginPath();
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "white";
     objC2D.moveTo(0.16, -0.0495);
     objC2D.lineTo(0.13,-0.1);
     objC2D.lineTo(0.2,-0.2);
@@ -1137,14 +1137,14 @@ function dessinerLodeCourt5() {
     
     //Tête
     objC2D.beginPath();
-    objC2D.fillStyle = "red";
+    objC2D.fillStyle = "white";
     objC2D.ellipse(0.038, -0.34, 0.05, 0.07, 15 * Math.PI/180, 0, 2 * Math.PI, true);
     objC2D.fill();
     
     objC2D.restore();
 }
 
-function dessinerLodeCourt6() {
+function dessinerGardeCourt6() {
     objC2D.save();
       //La forme de la tête
       objC2D.translate(0.05, 0.075);
@@ -1156,7 +1156,7 @@ function dessinerLodeCourt6() {
       // objC2D.lineCap = "round";
       objC2D.lineWidth = "0.001"
       objC2D.beginPath();
-      objC2D.fillStyle = "gold";
+      objC2D.fillStyle = "white";
       objC2D.moveTo(-0.03, -0.005);
       objC2D.lineTo(0.12, 0.07);
       objC2D.lineTo(0.07, 0.12);
@@ -1182,19 +1182,19 @@ function dessinerLodeCourt6() {
   
       // torse
       objC2D.beginPath();
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(-0.04,-0.1, 0.055, 0.2, 15 * Math.PI/180, 0, 2 * Math.PI, true );
       objC2D.fill();
   
       //postérieur
       objC2D.beginPath()
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(-0.11,0.06, 0.02, 0.06, 15 * Math.PI/180, 0, 2 * Math.PI, true ); //changer pour moveTo/linwTo
       objC2D.fill();
   
       //jambe droite
       objC2D.beginPath()
-      objC2D.fillStyle = "pink";
+      objC2D.fillStyle = "white";
       objC2D.moveTo(-0.12, 0.03);
       objC2D.lineTo(-0.045, 0.06);
       objC2D.lineTo(-0.1,0.21);
@@ -1211,13 +1211,13 @@ function dessinerLodeCourt6() {
       
       //cou
       objC2D.beginPath();
-      objC2D.fillStyle = "grey";
+      objC2D.fillStyle = "white";
       objC2D.fillRect(-0.024, -0.3, 0.05, 0.03)
       
       //bras droit
       objC2D.beginPath();
       objC2D.srokeStyle = "black";
-      objC2D.fillStyle = "pink";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(0.03, -0.14, 0.03, 0.12, -2 * Math.PI/180, 0, 2 * Math.PI, true);
       objC2D.fill();
       objC2D.stroke();
@@ -1231,7 +1231,7 @@ function dessinerLodeCourt6() {
      
       //Tête
       objC2D.beginPath();
-      objC2D.fillStyle = "red";
+      objC2D.fillStyle = "white";
       objC2D.ellipse(0, -0.36, 0.05, 0.07, -11 * Math.PI/180, 0, 2 * Math.PI, true);
       objC2D.fill();
       
