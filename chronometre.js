@@ -18,7 +18,6 @@ function mettreAjourChrono() {
     intMiliSecondes = intMsEcoulees % 1000;
 
     strTemps = (intMinutes < 10 ? '0' : '') + intMinutes + ":" + (intSecondes < 10 ? '0' : '') + intSecondes ;
-    
     objDateHeure1 = objDateHeure2;
 }
 
