@@ -1,4 +1,5 @@
-var intTest = 0;
+var intDessinerCourir = 0;
+var intDessinerEchelle = 0;
 var intDessinRalentir = 0;
 var intGaucheOUDroite = 0;
 
@@ -7,14 +8,14 @@ function Runner(intHauteur, intLargeur) {
     this.intLargeur = intLargeur * 0.65;
     this.intX = objCanvas.width / 2;
     this.intY = intHauteur * 16 - this.intHauteur / 2;
-    this.intTomber = 4; // constante 
+    this.intTomber = 2; // constante 
     this.intMonter = 3; //constante - plus rapide que tomber
     this.intDirection = 1
     this.intVitesse = 5;
     this.binDeplacableX = false;
     this.binDeplacableY = false;
     this.binMonter = false;
-    this.binCourir = false;
+    this.binCourir = true;
     this.binTraverserCorde = false;
 }
 
@@ -35,14 +36,20 @@ Runner.prototype.dessinerLodeRunner = function (objC2D) {
         objC2D.scale(-1, 1);
     }
 
-    if (this.binCourir) {
-        lodeAnimationCourir[intTest]('');
+    if (binCollisionBrique && this.binCourir) { // et s'il est sur une brique
+        lodeAnimationCourir[intDessinerCourir]('');
     }
-    else if (!this.binCourir) {
-        lodeAnimationCourir[2]('');
+    // else if (!binCollisionBrique) { //et s'il est sur une brique
+    //     lodeAnimationCourir[2]('');
+    // }
+    else if (binCollisionEchelle) {  // et s'il est sur une échelle 
+        lodeAnimationMonter[intDessinerEchelle]('');
     }
-    else if (this.binMonter) {
-        lodeAnnimationMonter[intTest]('');
+    else if (binCollisionCorde) { // et s'il est sur une corde
+        dessinerLodeRCorde();
+    }
+    else {
+        dessinerLodeR();
     }
 
     objC2D.fillStyle = 'blue';
@@ -68,6 +75,19 @@ Runner.prototype.mettreAJourLode = function () {
         intDessinRalentir = 0
         intTest = (intTest < lodeAnnimationMonter.length - 1) ? intTest + 1 : 0;
     }
+
+    if (intDessinRalentir >=10 && binCollisionBrique) {
+        intDessinRalentir = 0
+        intDessinerCourir = (intDessinerCourir < lodeAnimationCourir.length -1) ? intDessinerCourir+1 : 0;
+    }
+
+    //Monter les escaliers
+    if (intDessinRalentir >=15 && binCollisionEchelle) {
+        intDessinRalentir = 0
+        intDessinerEchelle = (intDessinerEchelle < lodeAnimationMonter.length -1) ? intDessinerEchelle+1 : 0;
+    }
+
+    lodeRunner.gestionCollisions();
 
 }
 
@@ -105,11 +125,12 @@ let binCollisionVide = false
 let binCollisionGarde = false
 let nbrLingotsRamasse = 0
 let binCompleteNiveau = false
+var binLaisserTomber = false;
 
 Runner.prototype.collision = function () {
+    
     var posX = Math.floor(this.intX / intLargeur) - 1
     var posY = Math.floor(this.intY / intHauteur) - 1
-
 
 
     binCollisionEchelleNiveau = tabChar[posY][posX] == '6' &&
@@ -189,8 +210,9 @@ Runner.prototype.creuserADroite = function () {
 }
 
 
-
 Runner.prototype.gererDeplacementRunner = function () {
+
+    booStart = !booStart ? true: true; 
     switch (event.keyCode) {
         //37 - gauche
         //38 - haut
@@ -198,7 +220,7 @@ Runner.prototype.gererDeplacementRunner = function () {
         //40 - bas
         case 37:
             intGaucheOUDroite = 1;
-            this.binCourir = true
+            this.binCourir = true;
             var objMur = tabObjMurs[0];
             this.intDirection = -1;
             this.binDeplacableY = false;
@@ -212,13 +234,14 @@ Runner.prototype.gererDeplacementRunner = function () {
             break;
         case 39:
             intGaucheOUDroite = 0;
-            this.binCourir = true
+            this.binCourir = true;
             var objMur = tabObjMurs[2];
             this.intDirection = 1;
             this.binDeplacableY = false;
             this.binDeplacableX = (this.intX + this.intLargeur / 2 + this.intVitesse) <= objMur.intXFin
             break;
         case 40:
+            binLaisserTomber = true;
             var objMur = tabObjMurs[3];
             this.intDirection = 1;
             this.binDeplacableX = false;
@@ -244,6 +267,8 @@ Runner.prototype.gererDeplacementRunner = function () {
         this.intY += this.intMonter * this.intDirection
     }
 
+    // var posX = Math.floor(this.intX / intLargeur) - 1
+    // var posY = Math.floor(this.intY / intHauteur) - 1
 
 
     if (binCompleteNiveau) {

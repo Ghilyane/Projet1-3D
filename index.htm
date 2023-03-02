@@ -16,7 +16,8 @@
   <script src="jeuPrincipal.js"> </script>
   <script src="placementElementsFixes.js"> </script>
   <script src="actionsLode.js"> </script>
-  <!-- <script src="lodeRunner2.js"> </script> -->
+  <script src="actionsGarde.js"> </script>
+  <script src="garde.js"> </script>
   <script src="lodeRunner.js"> </script>
   <script src="chronometre.js"> </script>
   <script src="gameover.js"></script>
@@ -27,17 +28,20 @@
     var objC2D = null;
     var objCycleAnimation = null;
     var objSons = null;
-
     var intMsEcoulees = 0;
+
     var tabObjMurs = null;
     var intHauteur = 0;
     var intLargeur = 0;
+
+    //Modifier les noms de tous les objets, en les préfixant de "obj"
     var brique = null;
     var beton = null;
     var echelle = null;
     var lingot = null;
     var corde = null;
     var lodeRunner = null;
+    var garde = null;
     var intScore = '0000000';
     var strTemps = '00:00';
     var strNiveau = '1';
@@ -56,8 +60,9 @@
       corde = new Corde();
       intHauteur = objCanvas.height / 23;
       intLargeur = objCanvas.width / 30;
-
+      
       lodeRunner = new Runner(intHauteur, intLargeur);
+      garde = new Garde(intHauteur, intLargeur);
 
       initTabChar(tabInitial)
       initBrique();
@@ -189,6 +194,7 @@
       lingot.dessinerLingot(objC2D);
       corde.dessinerCorde(objC2D);
       lodeRunner.dessinerLodeRunner(objC2D);
+      garde.dessinerGarde(objC2D);
       // dessinerLodeR();
       dessinerGrillage();
 
@@ -305,6 +311,7 @@
       mettreAJourGameOver()
       mettreAJourBrique();
       mettreAjourChrono();
+      garde.mettreAJourGarde();
       lodeRunner.mettreAJourLode();
       lingot.mettreAJourLingot();
     }
@@ -329,8 +336,8 @@
 
 <body onload="initAnimation()">
   <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
-  <canvas id="monCanvas" width="800" height="600" tabindex="1" onmousedown="demarrer(event)"
-    onkeydown="lodeRunner.gererDeplacementRunner()" onkeyup="lodeRunner.gererImmobilite()"> </canvas>
+  <canvas id="monCanvas" width="800" height="600" tabindex="1"
+  onkeydown="lodeRunner.gererDeplacementRunner()" onkeyup="lodeRunner.gererImmobilite()"> </canvas>
   <script>
   </script>
 </body>
