@@ -308,9 +308,9 @@
     }
 
     function mettreAJourAnimation() {
-      mettreAJourGameOver()
-      mettreAJourBrique();
       mettreAjourChrono();
+      mettreAJourBrique();
+      mettreAJourGameOver()
       garde.mettreAJourGarde();
       lodeRunner.mettreAJourLode();
       lingot.mettreAJourLingot();
@@ -336,8 +336,8 @@
 
 <body onload="initAnimation()">
   <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
-  <canvas id="monCanvas" width="800" height="600" tabindex="1"
-  onkeydown="lodeRunner.gererDeplacementRunner()" onkeyup="lodeRunner.gererImmobilite()"> </canvas>
+  <canvas id="monCanvas" width="800" height="600" tabindex="1" onkeydown="lodeRunner.gererDeplacementRunner()"
+   onkeyup="lodeRunner.gererImmobilite()"> </canvas>
   <script>
   </script>
 </body>
