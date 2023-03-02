@@ -43,7 +43,7 @@ function mettreAJourBrique() {
     if (tempsEcoule >= 8) {
         tempsEcoule = 0
 
-        //tabChar[tabPositionX][tabPositionY] = '1'
+        tabChar[tabPositionX][tabPositionY] = '1'
         // tabPositionX.shift()
         // tabPositionY.shift()
         //objSons.remplitTrou.play()
