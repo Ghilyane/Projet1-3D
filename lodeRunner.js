@@ -65,17 +65,6 @@ Runner.prototype.mettreAJourLode = function () {
     intDessinRalentir++;
 
     //Courir sur les briques
-    if (intDessinRalentir >= 10 && this.binCourir) {
-        intDessinRalentir = 0
-        intTest = (intTest < lodeAnimationCourir.length - 1) ? intTest + 1 : 0;
-    }
-
-    //Monter les escaliers
-    if (intDessinRalentir >= 8 && this.binMonter) {
-        intDessinRalentir = 0
-        intTest = (intTest < lodeAnnimationMonter.length - 1) ? intTest + 1 : 0;
-    }
-
     if (intDessinRalentir >=10 && binCollisionBrique) {
         intDessinRalentir = 0
         intDessinerCourir = (intDessinerCourir < lodeAnimationCourir.length -1) ? intDessinerCourir+1 : 0;
@@ -89,25 +78,8 @@ Runner.prototype.mettreAJourLode = function () {
 
     lodeRunner.gestionCollisions();
 
+
 }
-
-let tabEchelles = new Array()
-
-for (var i = 0; i < tabChar.length; i++) {
-    for (var j = 0; j < tabChar[0].length; j++) {
-        if (tabChar[i][j] == "3") {
-            const echelle = {
-                x: j,
-                y: i,
-                largeur: objCanvas.width / 30,
-                hauteur: objCanvas.height / 30
-            }
-
-            tabEchelles.push(echelle)
-        }
-    }
-}
-
 
 let overlapX = false
 let overlapY = false
@@ -206,6 +178,43 @@ Runner.prototype.creuserADroite = function () {
         //Ajouter les positions des trous
         tabPositionsCreuserX.push(posX - 1)
         tabPositionsCreuserY.push(posX + 1)
+    }
+}
+
+
+Runner.prototype.gestionCollisions = function () {
+    var posX = Math.floor(this.intX / intLargeur) - 1
+    var posY = Math.floor(this.intY / intHauteur) - 1
+
+    // console.log((this.intY / intHauteur) % 1)
+    
+    binCollisionVide = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '.' 
+    || tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '2'
+        || tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '4';
+
+    binCollisionCorde = tabChar[Math.floor((this.intY) / intHauteur) - 1][posX] == '4' && (this.intY / intHauteur) % 1 > 0.3 
+        && (this.intY / intHauteur) % 1 < 0.65;
+
+    binCollisionBrique = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '1';
+
+    if (binCollisionVide && (!binCollisionCorde || binLaisserTomber)) {
+        this.intY += this.intTomber
+    }
+    
+    if (binCollisionCorde) {
+        binCollisionVide = false;
+
+    }
+    else {
+        binLaisserTomber = false;
+    }
+
+    if (binCollisionEchelle) {
+
+    }
+
+    if (binCollisionBrique) {
+
     }
 }
 

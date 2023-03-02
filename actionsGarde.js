@@ -252,9 +252,7 @@ function dessinerGardeTomber() {
     objC2D.beginPath();
     objC2D.ellipse(0.12, -0.08, 0.03, 0.15, -11 * Math.PI/180, 0, 2 * Math.PI, true);
     objC2D.fill();
-    
-    
-    //Fesses
+
     
     //Bras droit (ellipse)
     objC2D.beginPath();
