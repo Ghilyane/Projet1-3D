@@ -19,6 +19,7 @@
   <!-- <script src="lodeRunner2.js"> </script> -->
   <script src="lodeRunner.js"> </script>
   <script src="chronometre.js"> </script>
+  <script src="gameover.js"></script>
 
   <script type="text/javascript">
     //créer un tableau d'objet
@@ -152,6 +153,11 @@
       objSon.load()
       objSons.gameOver = objSon
 
+      var objSon = document.createElement('audio')
+      objSon.setAttribute('src', 'Sons/SonGameOver2.mp3')
+      objSon.load()
+      objSons.gameOver2 = objSon
+
       //Runner termine un niveau
       var objSon = document.createElement('audio')
       objSon.setAttribute('src', 'Sons/SonTermineNiveau.mp3')
@@ -185,6 +191,9 @@
       lodeRunner.dessinerLodeRunner(objC2D);
       // dessinerLodeR();
       dessinerGrillage();
+
+      //dessinerGameOver()
+      
       //petites composantes dans fichier js
     }
 
@@ -293,6 +302,8 @@
     }
 
     function mettreAJourAnimation() {
+      mettreAJourGameOver()
+      mettreAJourBrique();
       mettreAjourChrono();
       lodeRunner.mettreAJourLode();
       lingot.mettreAJourLingot();
@@ -318,8 +329,8 @@
 
 <body onload="initAnimation()">
   <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
-  <canvas id="monCanvas" width="800" height="600" tabindex="1" onmousedown="demarrer(event)" 
-  onkeydown="lodeRunner.gererDeplacementRunner()" onkeyup="lodeRunner.gererImmobilite()"> </canvas>
+  <canvas id="monCanvas" width="800" height="600" tabindex="1" onmousedown="demarrer(event)"
+    onkeydown="lodeRunner.gererDeplacementRunner()" onkeyup="lodeRunner.gererImmobilite()"> </canvas>
   <script>
   </script>
 </body>

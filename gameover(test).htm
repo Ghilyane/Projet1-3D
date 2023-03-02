@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>X</title>
+    <link rel="stylesheet" type="text/css" href="" />
+
+    <script type="text/javascript">
+        //créer un tableau d'objet
+        var objCanvas = null;
+        var objC2D = null;
+        var objCycleAnimation = null;
+        var fltAngleRotation = 0;
+        var intTimer = 0;
+        var tempsEcoules = 0;
+        var objDateHeure1 = Date.now();
+
+        function initAnimation() {
+            objCanvas = document.getElementById('monCanvas');
+            objCanvas.focus();
+            objC2D = objCanvas.getContext('2d');
+
+            dessiner();
+            animer();
+
+        }
+
+        function dessiner() {
+            let strTexte = 'Game over'
+            objC2D.save()
+            objC2D.font = '120pt Impact'
+            objC2D.textAlign = 'center'
+            objC2D.translate(objCanvas.width / 2, objCanvas.height / 2)
+            objC2D.rotate(fltAngleRotation)
+            objC2D.fillText(strTexte, 0, 0)
+            objC2D.restore()
+        }
+
+        function animer() {
+            objCycleAnimation = requestAnimationFrame(animer);
+            effacerDessin();
+            mettreAJourAnimation();
+            dessiner();
+        }
+
+        function mettreAJourAnimation() {
+            var objDateHeure2 = Date.now();
+
+            fltAngleRotation += 1.6 * -Math.PI / 180;
+            intTimer += objDateHeure2 - objDateHeure1
+            tempsEcoules = (intTimer % 60000) / 1000
+            objDateHeure1 = objDateHeure2;
+
+            //Arret du spin apres 9 secs
+            if (tempsEcoules >= 9){
+                fltAngleRotation = 0
+            }
+        }
+
+        // Arrêter l'animation
+        function arreterAnimation() {
+            if (objCycleAnimation != null)
+                cancelAnimationFrame(objCycleAnimation);
+            objCycleAnimation = null;
+        }
+
+        // Pour effacer le dessin
+        function effacerDessin() {
+            objC2D.clearRect(0, 0, objCanvas.width, objCanvas.height);
+        }
+
+
+
+    </script>
+
+</head>
+
+<body onload="initAnimation()">
+    <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
+    <canvas id="monCanvas" width="800" height="600" tabindex="1"> </canvas>
+    <script>
+    </script>
+</body>
+
+</html>
