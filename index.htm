@@ -60,7 +60,7 @@
       corde = new Corde();
       intHauteur = objCanvas.height / 23;
       intLargeur = objCanvas.width / 30;
-      
+
       lodeRunner = new Runner(intHauteur, intLargeur);
       garde = new Garde(intHauteur, intLargeur);
 
@@ -198,8 +198,10 @@
       // dessinerLodeR();
       // dessinerGrillage();
 
-      //dessinerGameOver()
-      
+      if (binGameOver) {
+        dessinerGameOver()
+      }
+
       //petites composantes dans fichier js
     }
 
@@ -337,7 +339,7 @@
 <body onload="initAnimation()">
   <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
   <canvas id="monCanvas" width="800" height="600" tabindex="1" onkeydown="lodeRunner.gererDeplacementRunner()"
-   onkeyup="lodeRunner.gererImmobilite()"> </canvas>
+    onkeyup="lodeRunner.gererImmobilite()"> </canvas>
   <script>
   </script>
 </body>

@@ -2,18 +2,24 @@ let fltAngleRotation = 0
 let intTimer = 0
 let tempsEcoule_1 = 0
 var objDateHeure1 = Date.now()
+let binGameOver = false
 function mettreAJourGameOver() {
     var objDateHeure2 = Date.now();
 
     fltAngleRotation += 1.6 * -Math.PI / 180;
     intTimer += objDateHeure2 - objDateHeure1
     tempsEcoule_1 = (intTimer % 60000) / 1000
-    objDateHeure1 = objDateHeure2;
 
     //Arret du spin apres 9 secs
     if (tempsEcoule_1 >= 9) {
         fltAngleRotation = 0
     }
+    binGameOver = false
+    if (intVie == 0) {
+        binGameOver = true
+    }
+
+    objDateHeure1 = objDateHeure2;
 }
 
 function dessinerGameOver() {

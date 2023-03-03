@@ -147,14 +147,12 @@ Runner.prototype.collision = function () {
     var objMur = tabObjMurs[1];
     binCompleteNiveau = tabChar[posY][posX] == '6' && Math.abs(this.intY - this.intHauteur / 2 - intHauteur) <= objMur.intYFin
 
-
     console.log('echelle: ' + binCollisionEchelle + '\n' + 'lingot: ' + binCollisionLingot + '\n'
         + 'corde: ' + binCollisionCorde + '\n' + 'brique: ' + binCollisionBrique + '\n' + 'vide: ' + binCollisionVide + '\n' +
         'niveau complet: ' + binCompleteNiveau)
 }
 
-let tabPositionsCreuserX = new Array()
-let tabPositionsCreuserY = new Array()
+let tabPositionsCreuser = new Array()
 
 
 Runner.prototype.creuserAGauche = function () {
@@ -163,10 +161,10 @@ Runner.prototype.creuserAGauche = function () {
 
     if (tabChar[posY + 1][posX + 1] == '1') {
         tabChar[posY + 1][posX + 1] = '.'
-        //objSons.creuseTrou.play()
+        objSons.creuseTrou.play()
         //Ajouter les positions des trous
-        tabPositionsCreuserX.push(posX + 1)
-        tabPositionsCreuserY.push(posY + 1)
+        tabPositionsCreuser.push(posX + 1 + " " + (posY + 1))
+        console.log(posX + 1 + " " + (posY + 1))
     }
 }
 
@@ -176,10 +174,10 @@ Runner.prototype.creuserADroite = function () {
 
     if (tabChar[posY + 1][posX - 1] == '1') {
         tabChar[posY + 1][posX - 1] = '.'
-        //objSons.creuseTrou.play()
+        objSons.creuseTrou.play()
         //Ajouter les positions des trous
-        tabPositionsCreuserX.push(posX - 1)
-        tabPositionsCreuserY.push(posX + 1)
+        tabPositionsCreuser.push(posX - 1 + " " + (posY + 1))
+        console.log(posX - 1 + " " + (posY + 1))
     }
 }
 
@@ -295,10 +293,13 @@ Runner.prototype.gererDeplacementRunner = function () {
         this.intX = objCanvas.width / 2;
         this.intY = intHauteur * 16 - this.intHauteur / 2;
         intMsEcoulees = 0
+        booStart = false
         intScore = (Number(intScore) + 1500).toString().padStart(7, '0')
         strNiveau = Number(strNiveau) + 1
-        //Afficher lingot
-
+        tabChar = []
+        initTabChar(tabInitial)
+        nbrLingotsRamasse = 0
+        echelle.binAjoutEchelleNiveau = false
     }
 
 
