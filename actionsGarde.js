@@ -118,7 +118,7 @@ function dessinerGarde1() {
 
     objC2D.restore();
 }
-function dessinerGarde() {
+function dessinerGardeN() {
     objC2D.save();
     
     objC2D.translate(0, 0.075);
