@@ -161,12 +161,12 @@ Garde.prototype.gestionCollisions = function () {
 }
 
 Garde.prototype.deplacement = function() {
-    if (binCollisionEchelleG && binCollisionBriqueG) {
-        this.intY += this.intVitesse * this.intDirection
-    }
-    console.log(binCollisionEchelleG)
+    // if (binCollisionEchelleG && binCollisionBriqueG) {
+    //     this.intY += this.intVitesse * this.intDirection
+    // }
+    // console.log(binCollisionEchelleG)
     
-    if (binCollisionBriqueG) {
-        this.intX += this.intVitesse * this.intDirection
-    }
+    // if (binCollisionBriqueG) {
+    //     this.intX += this.intVitesse * this.intDirection
+    // }
 }

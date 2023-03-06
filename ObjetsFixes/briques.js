@@ -2,7 +2,10 @@ var objImgBrique = null;
 
 function Brique() {
     this.binTroue = false;
-    this.intTempsAccumule = 0;
+    this.intPositionXCreuser = 0;
+    this.intPositionYCreuser = 0;
+    this.intTempsEcoule = 0;
+    this.objDateHeure_1 = 0;
 }
 
 //pas obligatoire pour certains
@@ -30,22 +33,21 @@ Brique.prototype.dessinerBrique = function (objC2D) {
 }
 
 let msEcoulees = 0
-let tempsEcoule = 0
-var objDateHeure_1 = Date.now();
-let intPositionX = 0
-let intPositionY = 0
-let tabPosition = ''
+let tabPosition = new Array()
 //Remplir brique
 function mettreAJourBrique() {
 
     var objDateHeure_2 = Date.now();
-    msEcoulees += objDateHeure_2 - objDateHeure_1
-    tempsEcoule = Math.floor((msEcoulees % 60000) / 1000)
 
+    msEcoulees += objDateHeure_2 - this.objDateHeure_1
+    this.intTempsEcoule = Math.floor((msEcoulees % 60000) / 1000)
 
-    if (tempsEcoule >= 8) {
-        tempsEcoule = 0
-        
+    this.intTempsEcoule %= 9
+
+    console.log(typeof(this.objDateHeure_1))
+    console.log(this.intTempsEcoule + " " + this.objDateHeure_1 + " " + objDateHeure_2 + " " + msEcoulees)
+
+    if (this.intTempsEcoule == 8) {
         if (tabPositionsCreuser.length > 0) {
 
             /*
@@ -53,17 +55,41 @@ function mettreAJourBrique() {
             2-capable d'enelever un trous qui a deja ete creuser et remplit
             */
             tabPosition = tabPositionsCreuser.toString().split(' ')
-            intPositionX = Number(tabPosition[0])
-            intPositionY = Number(tabPosition[1])
+            this.intPositionXCreuser = Number(tabPosition[0])
+            this.intPositionYCreuser = Number(tabPosition[1])
 
-            tabChar[intPositionX][intPositionY] = '1'
+            tabChar[this.intPositionYCreuser][this.intPositionXCreuser] = '1'
             objSons.remplitTrou.play()
             objSons.remplitTrou.pause()
 
+            console.log(Date())
+            console.log(tabPosition)
+            console.log(tabPositionsCreuser)
+            console.log(Number(tabPosition[0]) + " " + Number(tabPosition[1]))
+            console.log(this.intPositionXCreuser + " " + this.intPositionYCreuser)
 
-            intPositionX = 0
-            intPositionY = 0
-            
+            console.log(tabPosition.length)
+            console.log(tabPositionsCreuser.length)
+
+            for (let i = 0; i < tabPosition.length; i++) {
+                tabPosition.splice(i, 2)
+            }
+
+            for (let i = 0; i < tabPositionsCreuser.length; i++) {
+                tabPositionsCreuser.splice(i, 2)
+            }
+
+
+            // intPositionX = 0
+            // intPositionY = 0
+
+            console.log('-----------------------------------------------------------')
+            console.log(tabPosition)
+            console.log(tabPositionsCreuser)
+            console.log(Number(tabPosition[0]) + " " + Number(tabPosition[1]))
+            console.log(this.intPositionXCreuser + " " + this.intPositionYCreuser)
+
+
 
             //tabChar[Number(tabPositionsCreuser[0].toString().at(0) + tabPositionsCreuser[0].toString().at(1))][Number(tabPositionsCreuser[0].toString().at(2) + tabPositionsCreuser[0].toString().at(3))] = '4'
             //tabPositionsCreuser.shift()
@@ -74,15 +100,7 @@ function mettreAJourBrique() {
             // }
 
         }
-        else if (tabPositionsCreuser.length > 1) {
-            console.log('ye')
-        }
-        
-       
-       // tabChar[tabPositionsCreuser[0].toString().substring(0,',')][tabPositionsCreuser[0].toString().substring(1,',')] = '2'
     }
     //console.log(tabPositionsCreuser)
-    objDateHeure_1 = objDateHeure_2;
-
-
+    this.objDateHeure_1 = objDateHeure_2;
 }

@@ -99,6 +99,9 @@ Runner.prototype.collision = function () {
     var posX = Math.floor(this.intX / intLargeur) - 1
     var posY = Math.floor(this.intY / intHauteur) - 1
 
+    var posXG = Math.floor(garde.intX / intLargeur) - 1
+    var posYG = Math.floor(garde.intY / intHauteur) - 1
+
     binCollisionEchelleNiveau = tabChar[posY][posX] == '6' &&
         Math.abs(this.intX - this.intLargeur / 2 - intLargeur) < Math.floor(this.intX / intLargeur) * intLargeur &&
         this.intX > Math.floor(this.intX / intLargeur) * intLargeur
@@ -137,9 +140,10 @@ Runner.prototype.collision = function () {
     var objMur = tabObjMurs[1];
     binCompleteNiveau = tabChar[posY][posX] == '6' && Math.abs(this.intY - this.intHauteur / 2 - intHauteur) <= objMur.intYFin
 
-    console.log('echelle: ' + binCollisionEchelle + '\n' + 'lingot: ' + binCollisionLingot + '\n'
-        + 'corde: ' + binCollisionCorde + '\n' + 'brique: ' + binCollisionBrique + '\n' + 'vide: ' + binCollisionVide + '\n' +
-        'niveau complet: ' + binCompleteNiveau)
+    // console.log('echelle: ' + binCollisionEchelle + '\n' + 'lingot: ' + binCollisionLingot + '\n'
+    //     + 'corde: ' + binCollisionCorde + '\n' + 'brique: ' + binCollisionBrique + '\n' + 'vide: ' + binCollisionVide + '\n' +
+    //     'niveau complet: ' + binCompleteNiveau)
+    console.log('garde: ' + posX == posXG)
 }
 
 let tabPositionsCreuser = new Array()
@@ -149,24 +153,29 @@ Runner.prototype.creuserAGauche = function () {
     var posX = Math.floor(this.intX / intLargeur) - 1
     var posY = Math.floor(this.intY / intHauteur) - 1
 
+    brique.objDateHeure_1 = Date.now()
+
     if (tabChar[posY + 1][posX + 1] == '1') {
         tabChar[posY + 1][posX + 1] = '.'
         objSons.creuseTrou.play()
         //Ajouter les positions des trous
-        tabPositionsCreuser.push(posX + 1 + " " + (posY + 1))
+        tabPositionsCreuser.push((posX + 1) + " " + (posY + 1))
         console.log(posX + 1 + " " + (posY + 1))
     }
 }
+
 
 Runner.prototype.creuserADroite = function () {
     var posX = Math.floor(this.intX / intLargeur) - 1
     var posY = Math.floor(this.intY / intHauteur) - 1
 
+    brique.objDateHeure_1 = Date.now()
+
     if (tabChar[posY + 1][posX - 1] == '1') {
         tabChar[posY + 1][posX - 1] = '.'
         objSons.creuseTrou.play()
         //Ajouter les positions des trous
-        tabPositionsCreuser.push(posX - 1 + " " + (posY + 1))
+        tabPositionsCreuser.push((posX - 1) + " " + (posY + 1))
         console.log(posX - 1 + " " + (posY + 1))
     }
 }
@@ -261,6 +270,7 @@ Runner.prototype.gererDeplacementRunner = function () {
         case 88:
             if (binCollisionBrique) {
                 lodeRunner.creuserAGauche()
+                console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
             }
             break;
         case 90:
