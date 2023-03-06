@@ -48,61 +48,46 @@ let tabPosition = new Array()
 function mettreAJourBrique() {
 
 /***                                                Tentative de modif                                              ****/
-    // var objDateHeure_2 = Date.now();
-    // var intDate1 = 0;
-    // // msEcoulees += objDateHeure_2 - this.objDateHeure_1
-    // for (var i = 0; i < tabObjBriques.length; i++) {
-    //     if (tabObjBriques[i].binTroue) {
-    //         tabObjBriques[i].intTempsEcoule = Math.floor((msEcoulees % 60000) / 1000)
+    var objDateHeure_2 = Date.now();
+    var intDate1 = 0;
+    for (var i = 0; i < tabObjBriques.length; i++) {
+        if (tabObjBriques[i].binTroue) {
+            tabObjBriques[i].intTempsEcoule = Math.floor((msEcoulees % 60000) / 1000)
             
-    //         intDate1 = tabObjBriques[i].objDateHeure_1;
-    //         // msEcoulees += objDateHeure_2 - intDate1;
-    //         this.intTempsEcoule = tabObjBriques[i].intTempsEcoule;
-
-    //     }
-    // }
-    // tempsE = Math.floor((msEcoulees % 60000) / 1000)
-    
-    // msEcoulees += objDateHeure_2 - intDate1;
-    // console.log("Temps 2 :  " + objDateHeure_2 + " tempsE : " + tempsE);
+            intDate1 = tabObjBriques[i].objDateHeure_1;
+            // msEcoulees += objDateHeure_2 - intDate1;
+            this.intTempsEcoule = tabObjBriques[i].intTempsEcoule;
+            console.log((this.intTempsEcoule)+ "   " + tabObjBriques[i].intTempsEcoule)
+        }
+    }
+    tempsE = Math.floor((msEcoulees % 60000) / 1000)
+   
+    msEcoulees += objDateHeure_2 - intDate1;
+    //console.log("Temps 2 :  " + objDateHeure_2 + " tempsE : " + tempsE);
 
 /***                                              -------------------------------                                         ****/
 
 
-    var objDateHeure_2 = Date.now();
 
-    msEcoulees += objDateHeure_2 - this.objDateHeure_1
-    this.intTempsEcoule = Math.floor((msEcoulees % 60000) / 1000)
+    //msEcoulees += objDateHeure_2 - this.objDateHeure_1
+   //this.intTempsEcoule = Math.floor((msEcoulees % 60000) / 1000)
 
-    this.intTempsEcoule %= 9
+    this.intTempsEcoule %= 60
 
     
     // console.log(typeof(this.objDateHeure_1))
     // console.log(this.intTempsEcoule + " " + this.objDateHeure_1 + " " + objDateHeure_2 + " " + msEcoulees)
 
-    if (this.intTempsEcoule == 8) {
+    if (this.intTempsEcoule == 59) {
         if (tabPositionsCreuser.length > 0) {
 
-            /*
-            1-capable d'enlever plusieurs trous
-            2-capable d'enelever un trous qui a deja ete creuser et remplit
-            */
             tabPosition = tabPositionsCreuser.toString().split(' ')
             this.intPositionXCreuser = Number(tabPosition[0])
             this.intPositionYCreuser = Number(tabPosition[1])
 
             tabChar[this.intPositionYCreuser][this.intPositionXCreuser] = '1'
             objSons.remplitTrou.play()
-            objSons.remplitTrou.pause()
 
-            // console.log(Date())
-            // console.log(tabPosition)
-            // console.log(tabPositionsCreuser)
-            // console.log(Number(tabPosition[0]) + " " + Number(tabPosition[1]))
-            // console.log(this.intPositionXCreuser + " " + this.intPositionYCreuser)
-
-            // console.log(tabPosition.length)
-            // console.log(tabPositionsCreuser.length)
 
             for (let i = 0; i < tabPosition.length; i++) {
                 tabPosition.splice(i, 2)
@@ -111,29 +96,7 @@ function mettreAJourBrique() {
             for (let i = 0; i < tabPositionsCreuser.length; i++) {
                 tabPositionsCreuser.splice(i, 2)
             }
-
-
-            // intPositionX = 0
-            // intPositionY = 0
-
-            // console.log('-----------------------------------------------------------')
-            // console.log(tabPosition)
-            // console.log(tabPositionsCreuser)
-            // console.log(Number(tabPosition[0]) + " " + Number(tabPosition[1]))
-            // console.log(this.intPositionXCreuser + " " + this.intPositionYCreuser)
-
-
-
-            //tabChar[Number(tabPositionsCreuser[0].toString().at(0) + tabPositionsCreuser[0].toString().at(1))][Number(tabPositionsCreuser[0].toString().at(2) + tabPositionsCreuser[0].toString().at(3))] = '4'
-            //tabPositionsCreuser.shift()
-
-
-            // for (let i = 0; i < tabPositionsCreuser.length; i++){
-            //     tabChar[tabPositionsCreuser[0].toString().at(0) + tabPositionsCreuser[0].toString().at(1)][tabPositionsCreuser[0].toString().at(2) + tabPositionsCreuser[0].toString().at(3)] = '1'
-            // }
-
         }
     }
-    //console.log(tabPositionsCreuser)
     this.objDateHeure_1 = objDateHeure_2;
 }
