@@ -103,8 +103,8 @@ Runner.prototype.collision = function () {
     var posX = Math.floor(this.intX / intLargeur) - 1
     var posY = Math.floor(this.intY / intHauteur) - 1
 
-    var posXG = Math.floor(garde.intX / intLargeur) - 1
-    var posYG = Math.floor(garde.intY / intHauteur) - 1
+    // var posXG = Math.floor(garde.intX / intLargeur) - 1
+    // var posYG = Math.floor(garde.intY / intHauteur) - 1
 
     binCollisionEchelleNiveau = tabChar[posY][posX] == '6' &&
         Math.abs(this.intX - this.intLargeur / 2 - intLargeur) < Math.floor(this.intX / intLargeur) * intLargeur &&
@@ -147,7 +147,7 @@ Runner.prototype.collision = function () {
     // console.log('echelle: ' + binCollisionEchelle + '\n' + 'lingot: ' + binCollisionLingot + '\n'
     //     + 'corde: ' + binCollisionCorde + '\n' + 'brique: ' + binCollisionBrique + '\n' + 'vide: ' + binCollisionVide + '\n' +
     //     'niveau complet: ' + binCompleteNiveau)
-    console.log('garde: ' + posX == posXG)
+    //console.log('garde: ' + posX == posXG)
 }
 
 let tabPositionsCreuser = new Array()
