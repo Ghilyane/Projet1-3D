@@ -52,7 +52,7 @@ Runner.prototype.dessinerLodeRunner = function (objC2D) {
     objC2D.fillStyle = 'blue';
     objC2D.font = objCanvas.width / 1000 + 'pt Arial'
 
-    objC2D.fillText(Math.floor(this.intX / intLargeur) - 1 + ', ' + (Math.floor(this.intY / intHauteur) - 1), -this.intLargeur / intLargeur / 2, -this.intHauteur / intHauteur / 2)
+    // objC2D.fillText(Math.floor(this.intX / intLargeur) - 1 + ', ' + (Math.floor(this.intY / intHauteur) - 1), -this.intLargeur / intLargeur / 2, -this.intHauteur / intHauteur / 2)
     objC2D.restore();
 }
 
@@ -104,8 +104,6 @@ Runner.prototype.collision = function () {
     var posX = Math.floor(this.intX / intLargeur) - 1
     var posY = Math.floor(this.intY / intHauteur) - 1
 
-
-    //Faire une boucle for
     // var posXG = Math.floor(garde.intX / intLargeur) - 1
     // var posYG = Math.floor(garde.intY / intHauteur) - 1
 
@@ -122,9 +120,11 @@ Runner.prototype.collision = function () {
         strScore = (Number(strScore) + 250).toString().padStart(7, '0')
     }
 
+
     //Dessiner l'echelle de niveau lorsque le runner ramasse tout les lingots
     if (nbrLingotsRamasse == 6) {
         objEchelle.binAjoutEchelleNiveau = true
+        binAjoutEchelleNiveau = true
     }
 
     // binCollisionCorde = tabChar[posY][posX] == '4'
@@ -140,6 +140,7 @@ Runner.prototype.collision = function () {
     // console.log('echelle: ' + binCollisionEchelle + '\n' + 'lingot: ' + binCollisionLingot + '\n'
     //     + 'corde: ' + binCollisionCorde + '\n' + 'brique: ' + binCollisionBrique + '\n' + 'vide: ' + binCollisionVide + '\n' +
     //     'niveau complet: ' + binCompleteNiveau)
+    //console.log('garde: ' + posX == posXG)
     // console.log('garde: ' + posX == posXG)
 }
 
@@ -192,9 +193,10 @@ Runner.prototype.creuserADroite = function () {
                 tabObjBriques[i].binTroue = true;
                 tabObjBriques[i].objDateHeure_1 = Date.now();
 
-                console.log(tabObjBriques[i].binTroue + "        " + tabObjBriques[i].objDateHeure_1 );
+                console.log(tabObjBriques[i].binTroue + "        " + tabObjBriques[i].objDateHeure_1);
             }
         }
+        console.log(tabObjBriques)
     }
 }
 
@@ -366,7 +368,9 @@ Runner.prototype.gererDeplacementRunner = function () {
         initTabChar(tabInitial)
         nbrLingotsRamasse = 0
         objEchelle.binAjoutEchelleNiveau = false
+        binAjoutEchelleNiveau = false
     }
+
 
     // console.log(binCollisionEchelle)
     // console.log(binCollisionLodeBriqueD)
