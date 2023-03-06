@@ -253,7 +253,7 @@ Garde.prototype.deplacement = function() {
     
         }
     }
-    console.log(this.intX + "         " + (this.intVitesse) )
+    // console.log(this.intX + "         " + (this.intVitesse) )
 
     
 

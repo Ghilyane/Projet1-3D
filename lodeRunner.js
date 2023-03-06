@@ -72,7 +72,7 @@ Runner.prototype.mettreAJourLode = function () {
         intDessinerEchelle = (intDessinerEchelle < lodeAnimationMonter.length -1) ? intDessinerEchelle+1 : 0;
     }
 
-    lodeRunner.gestionCollisions();
+    objLodeRunner.gestionCollisions();
 }
 
 // let overlapX = false
@@ -116,7 +116,7 @@ Runner.prototype.collision = function () {
         nbrLingotsRamasse++
         objSons.ramasseLingot.play()
         tabChar[posY][posX] = '.'
-        intScore = (Number(intScore) + 250).toString().padStart(7, '0')
+        strScore = (Number(strScore) + 250).toString().padStart(7, '0')
     }
 
     //Dessiner l'echelle de niveau lorsque le runner ramasse tout les lingots
@@ -148,6 +148,7 @@ Runner.prototype.collision = function () {
     //     + 'corde: ' + binCollisionCorde + '\n' + 'brique: ' + binCollisionBrique + '\n' + 'vide: ' + binCollisionVide + '\n' +
     //     'niveau complet: ' + binCompleteNiveau)
     //console.log('garde: ' + posX == posXG)
+    // console.log('garde: ' + posX == posXG)
 }
 
 let tabPositionsCreuser = new Array()
@@ -157,14 +158,24 @@ Runner.prototype.creuserAGauche = function () {
     var posX = Math.floor(this.intX / intLargeur) - 1
     var posY = Math.floor(this.intY / intHauteur) - 1
 
-    brique.objDateHeure_1 = Date.now()
+    objBrique.objDateHeure_1 = Date.now()
 
     if (tabChar[posY + 1][posX + 1] == '1') {
         tabChar[posY + 1][posX + 1] = '.'
         objSons.creuseTrou.play()
         //Ajouter les positions des trous
         tabPositionsCreuser.push((posX + 1) + " " + (posY + 1))
-        console.log(posX + 1 + " " + (posY + 1))
+        // console.log(posX + 1 + " " + (posY + 1))
+
+        for (var i = 0; i < tabObjBriques.length; i++) {
+            if (tabObjBriques[i].intPositionXCreuser == (posX +1) 
+            && tabObjBriques[i].intPositionYCreuser == (posY +1)  ) {
+                tabObjBriques[i].binTroue = true;
+                tabObjBriques[i].objDateHeure_1 = Date.now();
+
+                console.log(tabObjBriques[i].binTroue + "        " + tabObjBriques[i].objDateHeure_1 );
+            }
+        }
     }
 }
 
@@ -173,14 +184,25 @@ Runner.prototype.creuserADroite = function () {
     var posX = Math.floor(this.intX / intLargeur) - 1
     var posY = Math.floor(this.intY / intHauteur) - 1
 
-    brique.objDateHeure_1 = Date.now()
+    objBrique.objDateHeure_1 = Date.now()
 
     if (tabChar[posY + 1][posX - 1] == '1') {
         tabChar[posY + 1][posX - 1] = '.'
         objSons.creuseTrou.play()
         //Ajouter les positions des trous
         tabPositionsCreuser.push((posX - 1) + " " + (posY + 1))
-        console.log(posX - 1 + " " + (posY + 1))
+        // console.log(posX - 1 + " " + (posY + 1))
+
+
+        for (var i = 0; i < tabObjBriques.length; i++) {
+            if (tabObjBriques[i].intPositionXCreuser == (posX +1) 
+            && tabObjBriques[i].intPositionYCreuser == (posY +1)  ) {
+                tabObjBriques[i].binTroue = true;
+                tabObjBriques[i].objDateHeure_1 = Date.now();
+
+                console.log(tabObjBriques[i].binTroue + "        " + tabObjBriques[i].objDateHeure_1 );
+            }
+        }
     }
 }
 
@@ -279,13 +301,13 @@ Runner.prototype.gererDeplacementRunner = function () {
             break;
         case 88:
             if (binCollisionBrique) {
-                lodeRunner.creuserAGauche()
-                console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+                objLodeRunner.creuserAGauche()
+                // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
             }
             break;
         case 90:
             if (binCollisionBrique) {
-                lodeRunner.creuserADroite()
+                objLodeRunner.creuserADroite()
             }
             break;
     }
@@ -296,7 +318,7 @@ Runner.prototype.gererDeplacementRunner = function () {
             this.intX += this.intVitesse * this.intDirection
         }
         if (binCollisionLodeBriqueD && this.intDirection == -1) {
-            console.log(this.intDirection)
+            // console.log(this.intDirection)
             this.intX += this.intVitesse * this.intDirection
         }
         if (!binCollisionLodeBriqueG && !binCollisionLodeBriqueD) {
@@ -325,7 +347,7 @@ Runner.prototype.gererDeplacementRunner = function () {
         this.intY = intHauteur * 16 - this.intHauteur / 2;
         intMsEcoulees = 0
         binStart = false
-        intScore = (Number(intScore) + 1500).toString().padStart(7, '0')
+        strScore = (Number(strScore) + 1500).toString().padStart(7, '0')
         strNiveau = Number(strNiveau) + 1
         tabChar = []
         initTabChar(tabInitial)
@@ -337,6 +359,6 @@ Runner.prototype.gererDeplacementRunner = function () {
     // console.log(binCollisionLodeBriqueD)
 
 
-    lodeRunner.collision()
+    objLodeRunner.collision()
 }
 
