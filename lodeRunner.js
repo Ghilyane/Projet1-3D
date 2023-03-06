@@ -243,15 +243,13 @@ Runner.prototype.gestionCollisions = function () {
                 this.intY -= (i);
             }
         }
-
-
+      
     }
 
 }
 
-
 Runner.prototype.gererDeplacementRunner = function () {
-    
+
     if (!binStart) {
         binStart = true
     } 
@@ -370,7 +368,6 @@ Runner.prototype.gererDeplacementRunner = function () {
         }
     }
 
-    // console.log(binAjoutEchelleNiveau)
     objLodeRunner.collision()
 }
 
