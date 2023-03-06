@@ -52,7 +52,7 @@ Runner.prototype.dessinerLodeRunner = function (objC2D) {
     objC2D.fillStyle = 'blue';
     objC2D.font = objCanvas.width / 1000 + 'pt Arial'
 
-    objC2D.fillText(Math.floor(this.intX / intLargeur) - 1 + ', ' + (Math.floor(this.intY / intHauteur) - 1), -this.intLargeur / intLargeur / 2, -this.intHauteur / intHauteur / 2)
+    // objC2D.fillText(Math.floor(this.intX / intLargeur) - 1 + ', ' + (Math.floor(this.intY / intHauteur) - 1), -this.intLargeur / intLargeur / 2, -this.intHauteur / intHauteur / 2)
     objC2D.restore();
 }
 
@@ -119,9 +119,10 @@ Runner.prototype.collision = function () {
         strScore = (Number(strScore) + 250).toString().padStart(7, '0')
     }
 
+
     //Dessiner l'echelle de niveau lorsque le runner ramasse tout les lingots
     if (nbrLingotsRamasse == 6) {
-        echelle.binAjoutEchelleNiveau = true
+        binAjoutEchelleNiveau = true
     }
 
     // binCollisionCorde = tabChar[posY][posX] == '4'
@@ -200,9 +201,10 @@ Runner.prototype.creuserADroite = function () {
                 tabObjBriques[i].binTroue = true;
                 tabObjBriques[i].objDateHeure_1 = Date.now();
 
-                console.log(tabObjBriques[i].binTroue + "        " + tabObjBriques[i].objDateHeure_1 );
+                console.log(tabObjBriques[i].binTroue + "        " + tabObjBriques[i].objDateHeure_1);
             }
         }
+        console.log(tabObjBriques)
     }
 }
 
@@ -302,7 +304,6 @@ Runner.prototype.gererDeplacementRunner = function () {
         case 88:
             if (binCollisionBrique) {
                 objLodeRunner.creuserAGauche()
-                // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
             }
             break;
         case 90:
@@ -352,8 +353,9 @@ Runner.prototype.gererDeplacementRunner = function () {
         tabChar = []
         initTabChar(tabInitial)
         nbrLingotsRamasse = 0
-        echelle.binAjoutEchelleNiveau = false
+        binAjoutEchelleNiveau = false
     }
+
 
     // console.log(binCollisionEchelle)
     // console.log(binCollisionLodeBriqueD)

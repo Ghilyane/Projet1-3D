@@ -1,7 +1,7 @@
 var objImgEchelle = null;
+var binAjoutEchelleNiveau = false
 
 function Echelle() {
-    this.binAjoutEchelleNiveau = false
 }
 
 function initEchelle() {
@@ -18,8 +18,11 @@ Echelle.prototype.dessinerEchelle = function (objC2D) {
             if (tabChar[i][j] == "3") {
                 objC2D.drawImage(objImgEchelle, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
             }
-            else if (tabChar[i][j] == "6" && this.binAjoutEchelleNiveau == true) {
+            else if (tabChar[i][j] == "6" && binAjoutEchelleNiveau) {
                 objC2D.drawImage(objImgEchelle, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
+            }
+            else if (tabChar[i][j] == '6' && !binAjoutEchelleNiveau) {
+                tabChar[i][j] = '.'
             }
         }
     }
