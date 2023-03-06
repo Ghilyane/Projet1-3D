@@ -11,7 +11,7 @@ function Runner(intHauteur, intLargeur) {
     this.intTomber = 2; // constante 
     this.intMonter = 3; //constante - plus rapide que tomber
     this.intDirection = 1
-    this.intVitesse = 5;
+    this.intVitesse = 6;
     this.binDeplacableX = false;
     this.binDeplacableY = false;
     this.binMonter = false;
@@ -243,6 +243,8 @@ Runner.prototype.gestionCollisions = function () {
                 this.intY -= (i);
             }
         }
+
+
     }
 
 }
@@ -345,6 +347,27 @@ Runner.prototype.gererDeplacementRunner = function () {
         nbrLingotsRamasse = 0
         objEchelle.binAjoutEchelleNiveau = false
         binAjoutEchelleNiveau = false
+
+        tabObjGardes = [];
+        switch(strNiveau) {
+            case '2':
+            console.log(strNiveau)
+            tabObjGardes = [new Garde(intHauteur, intLargeur, 20, 16, 'droite'), new Garde(intHauteur, intLargeur, 5, 8, 'gauche'), 
+            new Garde(intHauteur, intLargeur, 5, 14, 'droite'), new Garde(intHauteur, intLargeur, 24, 14, 'gauche')];
+          break;
+          case '3':
+            tabObjGardes = [new Garde(intHauteur, intLargeur, 20, 16, 'droite'), new Garde(intHauteur, intLargeur, 5, 8, 'gauche'), 
+            new Garde(intHauteur, intLargeur, 5, 14, 'droite'), new Garde(intHauteur, intLargeur, 8, 11, 'gauche')];
+          break;
+          case '4':
+            tabObjGardes = [new Garde(intHauteur, intLargeur, 20, 16, 'droite'), new Garde(intHauteur, intLargeur, 5, 8, 'gauche'), 
+            new Garde(intHauteur, intLargeur, 5, 14, 'droite'), new Garde(intHauteur, intLargeur, 24, 14, 'gauche')];
+          break;
+          case '5':
+            tabObjGardes = [new Garde(intHauteur, intLargeur, 20, 16, 'droite'), new Garde(intHauteur, intLargeur, 5, 8, 'gauche'), 
+            new Garde(intHauteur, intLargeur, 5, 14, 'droite'), new Garde(intHauteur, intLargeur, 24, 14, 'gauche')];
+          break;
+        }
     }
 
     // console.log(binAjoutEchelleNiveau)
