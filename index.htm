@@ -30,19 +30,20 @@
     var objSons = null;
     var intMsEcoulees = 0;
 
+    var tabObjBriques = null;
     var tabObjMurs = null;
     var intHauteur = 0;
     var intLargeur = 0;
 
     //Modifier les noms de tous les objets, en les préfixant de "obj"
-    var brique = null;
-    var beton = null;
-    var echelle = null;
-    var lingot = null;
-    var corde = null;
-    var lodeRunner = null;
+    var objBrique = null;
+    var objBeton = null;
+    var objEchelle = null;
+    var objLingot = null;
+    var objCorde = null;
+    var objLodeRunner = null;
     var tabObjGardes = null;
-    var intScore = '0000000';
+    var strScore = '0000000';
     var strTemps = '00:00';
     var strNiveau = '1';
     var intVie = 5;
@@ -53,15 +54,17 @@
       objCanvas.focus();
       objC2D = objCanvas.getContext('2d');
 
-      brique = new Brique();
-      beton = new Beton();
-      echelle = new Echelle();
-      lingot = new Lingot();
-      corde = new Corde();
+      objBrique = new Brique();
+      objBeton = new Beton();
+      objEchelle = new Echelle();
+      objLingot = new Lingot();
+      objCorde = new Corde();
       intHauteur = objCanvas.height / 23;
       intLargeur = objCanvas.width / 30;
-      lodeRunner = new Runner(intHauteur, intLargeur);
+      objLodeRunner = new Runner(intHauteur, intLargeur);
+      tabObjBriques = new Array();
 
+      //if pour les niveau et ensuite implémenter le nombre de gardes dans chaque choix de niveau
       tabObjGardes = [new Garde(intHauteur, intLargeur, 9, 5), new Garde(intHauteur, intLargeur, 22, 11)];
 
       initTabChar(tabInitial)
@@ -188,13 +191,13 @@
       dessinerFond();
       dessinerMurs();
       dessinerInfo();
-      brique.dessinerBrique(objC2D);
-      beton.dessinerBeton(objC2D);
-      echelle.dessinerEchelle(objC2D);
-      lingot.dessinerLingot(objC2D);
-      corde.dessinerCorde(objC2D);
-      lodeRunner.dessinerLodeRunner(objC2D);
-      for (let i = 0; i < tabObjGardes.length; i++) {
+      objBrique.dessinerBrique(objC2D);
+      objBeton.dessinerBeton(objC2D);
+      objEchelle.dessinerEchelle(objC2D);
+      objLingot.dessinerLingot(objC2D);
+      objCorde.dessinerCorde(objC2D);
+      objLodeRunner.dessinerLodeRunner(objC2D);
+      for (var i = 0; i < tabObjGardes.length; i++) {
         tabObjGardes[i].dessinerGarde(objC2D); 
       }
     
@@ -218,7 +221,7 @@
       objC2D.font = objCanvas.width / 35 + 'pt Impact';
       objC2D.textAlign = 'center';
       objC2D.textBaseline = 'middle';
-      objC2D.fillText("Score : " + intScore, 2, Math.floor(objCanvas.height / 32));
+      objC2D.fillText("Score : " + strScore, 2, Math.floor(objCanvas.height / 32));
 
       objC2D.fillStyle = 'green';
       objC2D.textAlign = 'center';
@@ -316,11 +319,11 @@
       mettreAjourChrono();
       mettreAJourBrique();
       mettreAJourGameOver()
-      lodeRunner.mettreAJourLode();
+      objLodeRunner.mettreAJourLode();
       for (let i = 0; i < tabObjGardes.length; i++) {
         tabObjGardes[i].mettreAJourGarde(objC2D); 
       }
-      lingot.mettreAJourLingot();
+      objLingot.mettreAJourLingot();
     }
 
     // Arrêter l'animation
@@ -343,8 +346,8 @@
 
 <body onload="initAnimation()">
   <!-- <canvas id="monCanvas" width="1300" height="646" tabindex="1"> </canvas> -->
-  <canvas id="monCanvas" width="800" height="600" tabindex="1" onkeydown="lodeRunner.gererDeplacementRunner()"
-    onkeyup="lodeRunner.gererImmobilite()"> </canvas>
+  <canvas id="monCanvas" width="800" height="600" tabindex="1" onkeydown="objLodeRunner.gererDeplacementRunner()"
+    onkeyup="objLodeRunner.gererImmobilite()"> </canvas>
   <script>
   </script>
 </body>
