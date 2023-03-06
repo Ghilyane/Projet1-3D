@@ -41,7 +41,7 @@
     var lingot = null;
     var corde = null;
     var lodeRunner = null;
-    var garde = null;
+    var tabObjGardes = null;
     var intScore = '0000000';
     var strTemps = '00:00';
     var strNiveau = '1';
@@ -60,9 +60,9 @@
       corde = new Corde();
       intHauteur = objCanvas.height / 23;
       intLargeur = objCanvas.width / 30;
-
       lodeRunner = new Runner(intHauteur, intLargeur);
-      garde = new Garde(intHauteur, intLargeur);
+
+      tabObjGardes = [new Garde(intHauteur, intLargeur, 9, 5), new Garde(intHauteur, intLargeur, 22, 11)];
 
       initTabChar(tabInitial)
       initBrique();
@@ -194,7 +194,10 @@
       lingot.dessinerLingot(objC2D);
       corde.dessinerCorde(objC2D);
       lodeRunner.dessinerLodeRunner(objC2D);
-      garde.dessinerGarde(objC2D);
+      for (let i = 0; i < tabObjGardes.length; i++) {
+        tabObjGardes[i].dessinerGarde(objC2D); 
+      }
+    
       // dessinerLodeR();
       // dessinerGrillage();
 
@@ -314,8 +317,10 @@
       mettreAJourBrique();
       mettreAJourGameOver()
       lodeRunner.mettreAJourLode();
+      for (let i = 0; i < tabObjGardes.length; i++) {
+        tabObjGardes[i].mettreAJourGarde(objC2D); 
+      }
       lingot.mettreAJourLingot();
-      garde.mettreAJourGarde();
     }
 
     // Arrêter l'animation

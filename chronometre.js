@@ -3,13 +3,13 @@ var strTemps = "";
 var intMiliSecondes = 0;
 var intSecondes = 0;
 var intMinutes = 0;
-var booStart = false;
+var binStart = false;
 var objDateHeure1 = Date.now();
 var intMsEcoulees = 0;
 
 function mettreAjourChrono() {
     var objDateHeure2 = Date.now();
-    if (booStart) {
+    if (binStart) {
         intMsEcoulees += objDateHeure2 - objDateHeure1;
     }
 
@@ -22,8 +22,8 @@ function mettreAjourChrono() {
 }
 
 function demarrer() {
-    if (!booStart) { //mise en marche du chronomètre
-            booStart = true;
+    if (!binStart) { //mise en marche du chronomètre
+            binStart = true;
     }
         // else if (e.button == 0 && booStart) { //mise en arrêt du chronomètre 
         //     booStart = false;

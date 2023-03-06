@@ -562,7 +562,7 @@ function dessinerLodeRMonte2() {
 
     //Jambe droite
     objC2D.beginPath();
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "gold";
     objC2D.lineWidth = "0.001"
     objC2D.moveTo(0.085, 0.015);
     objC2D.lineTo(0, 0.015);
@@ -588,7 +588,7 @@ function dessinerLodeRMonte2() {
     
     //Bras droit (ellipse)
     objC2D.beginPath();
-    objC2D.fillStyle = "pink";
+    objC2D.fillStyle = "gold";
     objC2D.ellipse(0.12, -0.15, 0.03, 0.08, -30 * Math.PI/180, 0, 2 * Math.PI, true);
     objC2D.fill();
 
@@ -601,7 +601,7 @@ function dessinerLodeRMonte2() {
     
     //Bras gauche (ellipse)
     objC2D.beginPath();
-    objC2D.fillStyle = "gold";
+    objC2D.fillStyle = "pink";
     objC2D.ellipse(-0.14, -0.19, 0.03, 0.1, 80 * Math.PI/180, 0, 2 * Math.PI, true);
     objC2D.fill();
 
@@ -614,7 +614,7 @@ function dessinerLodeRMonte2() {
 
     //Jambe gauche
     objC2D.beginPath();
-    objC2D.fillStyle = "gold";
+    objC2D.fillStyle = "pink";
     objC2D.moveTo(-0.085, 0.015);
     objC2D.lineTo(-0, 0.015);
     objC2D.lineTo(-0.08, 0.1);

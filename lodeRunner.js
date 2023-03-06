@@ -80,6 +80,10 @@ Runner.prototype.mettreAJourLode = function () {
 
 Runner.prototype.gererImmobilite = function () {
     this.binCourir = false;
+
+    if (!binCollisionEchelle) {
+
+    }
 }
 
 let binCollisionEchelle = false
@@ -87,8 +91,8 @@ let binCollisionEchelleNiveau = false
 let binCollisionLingot = false
 let binCollisionCorde = false
 let binCollisionBrique = false
-var binCollisionBriqueG = false;
-var binCollisionBriqueD = false;
+var binCollisionLodeBriqueG = false;
+var binCollisionLodeBriqueD = false;
 let binCollisionVide = false
 let binCollisionGarde = false
 let nbrLingotsRamasse = 0
@@ -123,23 +127,23 @@ Runner.prototype.collision = function () {
     //Faire tomber lorsque le runner est dans le vide
     binCollisionVide = tabChar[posY][posX] == '.' && !binCollisionEchelle && !binCollisionBrique && !binCollisionLingot
 
-    if (binCollisionVide) {
-        binCollisionEchelle = Math.abs(this.intY - this.intHauteur / 2 - intHauteur) < Math.floor(this.intY / intHauteur) * intHauteur &&
-            this.intY > Math.floor(this.intY / intHauteur) * intHauteur
-    }
-    else {
-        binCollisionEchelle = tabChar[posY][posX] == '3' &&
-        Math.abs(this.intX - this.intLargeur / 2 - intLargeur) < Math.floor(this.intX / intLargeur) * intLargeur &&
-        this.intX > Math.floor(this.intX / intLargeur) * intLargeur    
-    }
-    
+    // if (binCollisionVide) {
+    //     binCollisionEchelle = Math.abs(this.intY - this.intHauteur / 2 - intHauteur) < Math.floor(this.intY / intHauteur) * intHauteur &&
+    //         this.intY > Math.floor(this.intY / intHauteur) * intHauteur
+    // }
+    // else {
+    //     binCollisionEchelle = tabChar[posY][posX] == '3' &&
+    //     Math.abs(this.intX - this.intLargeur / 2 - intLargeur) < Math.floor(this.intX / intLargeur) * intLargeur &&
+    //     this.intX > Math.floor(this.intX / intLargeur) * intLargeur
+    // }
+
     //Manipuler lorsqu'il atteint l'echelle de niveau
     var objMur = tabObjMurs[1];
     binCompleteNiveau = tabChar[posY][posX] == '6' && Math.abs(this.intY - this.intHauteur / 2 - intHauteur) <= objMur.intYFin
 
-    console.log('echelle: ' + binCollisionEchelle + '\n' + 'lingot: ' + binCollisionLingot + '\n'
-        + 'corde: ' + binCollisionCorde + '\n' + 'brique: ' + binCollisionBrique + '\n' + 'vide: ' + binCollisionVide + '\n' +
-        'niveau complet: ' + binCompleteNiveau)
+    // console.log('echelle: ' + binCollisionEchelle + '\n' + 'lingot: ' + binCollisionLingot + '\n'
+    //     + 'corde: ' + binCollisionCorde + '\n' + 'brique: ' + binCollisionBrique + '\n' + 'vide: ' + binCollisionVide + '\n' +
+    //     'niveau complet: ' + binCompleteNiveau)
 }
 
 let tabPositionsCreuser = new Array()
@@ -176,8 +180,10 @@ Runner.prototype.gestionCollisions = function () {
     var posX = Math.floor(this.intX / intLargeur) - 1
     var posY = Math.floor(this.intY / intHauteur) - 1
 
-    // console.log((this.intY / intHauteur) % 1)
-    binCollisionBrique = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '1';
+    // console.log((this.intY / intHauteur) % 1 + "    " + binCollisionBrique)
+    // console.log((this.intY / intHauteur) % 1 + "        Droite : " + binCollisionLodeBriqueD + "  Gauche : " + binCollisionLodeBriqueG)
+    // console.log((this.intX / intLargeur) % 1 + "        Droite : " + binCollisionLodeBriqueD + "  Gauche : " + binCollisionLodeBriqueG)
+    // binCollisionBrique = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '1';
     
     binCollisionVide = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '.' 
     || tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '2'
@@ -186,14 +192,17 @@ Runner.prototype.gestionCollisions = function () {
     binCollisionCorde = tabChar[Math.floor((this.intY) / intHauteur) - 1][posX] == '4' && (this.intY / intHauteur) % 1 > 0.3 
         && (this.intY / intHauteur) % 1 < 0.65 && !binCollisionBrique && (tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] != '3');
 
-        
+    binCollisionEchelle = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 2][posX] == '3' 
+    || tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '3';
    //Collisions briques (gauche et droite) 
-    binCollisionBriqueD = tabChar[posY][Math.floor((this.intX + this.intLargeur/2) / intLargeur) + 1] == '1' 
-        && tabChar[posY][Math.floor((this.intX + this.intLargeur/2) / intLargeur) + 1] == '1' 
-        binCollisionBriqueG = tabChar[posY][Math.floor((this.intX - this.intLargeur/2) / intLargeur) - 1] == '1'
-        // || tabChar[posY][Math.floor((this.intX - this.intLargeur/2) / intLargeur) - 1] == '1'
+   
+    binCollisionLodeBriqueD = (tabChar[posY][posX+1] == '1'|| (tabChar[posY+1][posX+1] == '1') && (this.intY / intHauteur) % 1 > 0.62)
+    && (this.intX / intLargeur) % 1 >= 0.4
     
-    // console.log(binCollisionBriqueG)
+    binCollisionLodeBriqueG = (tabChar[posY][posX-1] == '1'|| (tabChar[posY+1][posX-1] == '1') && (this.intY / intHauteur) % 1 > 0.62)  
+    && (this.intX / intLargeur) % 1 <= 0.4
+
+    // console.log(tabChar[posY+1][posX-1] == '1' && (this.intY / intHauteur) % 1 > 0.6)
     // console.log("Y : " + posY + " X : " + (Math.floor((this.intX - this.intLargeur/2) / intLargeur) - 1))
 
     //Créer une collision pour les côtés
@@ -221,7 +230,7 @@ Runner.prototype.gestionCollisions = function () {
 
 Runner.prototype.gererDeplacementRunner = function () {
     
-    booStart = !booStart ? true: true; 
+    binStart = !binStart ? true: true; 
     // console.log(booStart)
 
     switch (event.keyCode) {
@@ -250,6 +259,7 @@ Runner.prototype.gererDeplacementRunner = function () {
                 this.intDirection = 1;
                 this.binDeplacableY = false;
                 this.binDeplacableX = (this.intX + this.intLargeur / 2 + this.intVitesse) <= objMur.intXFin
+                // console.log(this.binDeplacableX)
             break;
         case 40:
             binLaisserTomber = true;
@@ -270,8 +280,20 @@ Runner.prototype.gererDeplacementRunner = function () {
             break;
     }
 
-    if (this.binDeplacableX && !this.binDeplacableY && (!binCollisionBriqueD || !binCollisionBriqueG)) {
-        this.intX += this.intVitesse * this.intDirection
+    if (this.binDeplacableX && !this.binDeplacableY && !binCollisionVide) {
+
+        if (binCollisionLodeBriqueG && this.intDirection == 1) {
+            this.intX += this.intVitesse * this.intDirection
+        }
+        if (binCollisionLodeBriqueD && this.intDirection == -1) {
+            console.log(this.intDirection)
+            this.intX += this.intVitesse * this.intDirection
+        }
+        if (!binCollisionLodeBriqueG && !binCollisionLodeBriqueD) {
+            this.intX += this.intVitesse * this.intDirection
+
+        }
+        
     }
 
     if (this.binDeplacableY && !this.binDeplacableX && binCollisionEchelle || binCollisionEchelleNiveau) {
@@ -292,7 +314,7 @@ Runner.prototype.gererDeplacementRunner = function () {
         this.intX = objCanvas.width / 2;
         this.intY = intHauteur * 16 - this.intHauteur / 2;
         intMsEcoulees = 0
-        booStart = false
+        binStart = false
         intScore = (Number(intScore) + 1500).toString().padStart(7, '0')
         strNiveau = Number(strNiveau) + 1
         tabChar = []
@@ -302,7 +324,7 @@ Runner.prototype.gererDeplacementRunner = function () {
     }
 
     // console.log(binCollisionEchelle)
-    // console.log(binCollisionBriqueD)
+    // console.log(binCollisionLodeBriqueD)
 
 
     lodeRunner.collision()
