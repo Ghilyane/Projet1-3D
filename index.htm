@@ -65,8 +65,26 @@
       tabObjBriques = new Array();
 
       //if pour les niveau et ensuite implémenter le nombre de gardes dans chaque choix de niveau
-      tabObjGardes = [new Garde(intHauteur, intLargeur, 9, 5), new Garde(intHauteur, intLargeur, 22, 11)];
+      tabObjGardes = [new Garde(intHauteur, intLargeur, 20, 16, 'droite'), new Garde(intHauteur, intLargeur, 5, 8, 'gauche'), 
+      new Garde(intHauteur, intLargeur, 5, 14, 'droite')];
 
+      console.log(strNiveau)
+      switch(strNiveau) {
+        case '2':
+          tabObjBriques.push(new Garde(intHauteur, intLargeur, 24, 14, 'gauche'))
+        break;
+        case '3':
+          tabObjBriques.push(new Garde(intHauteur, intLargeur, 8, 11, 'gauche'))
+        break;
+        case '4':
+          tabObjBriques.push(new Garde(intHauteur, intLargeur, 24, 14, 'gauche'))
+        break;
+        case '5':
+          tabObjBriques.push(new Garde(intHauteur, intLargeur, 24, 14, 'gauche'))
+        break;
+      }
+      
+      console.log(tabObjGardes);
       initTabChar(tabInitial)
       initBrique();
       initBeton();
@@ -324,6 +342,7 @@
         tabObjGardes[i].mettreAJourGarde(objC2D); 
       }
       objLingot.mettreAJourLingot();
+
     }
 
     // Arrêter l'animation

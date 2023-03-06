@@ -1,12 +1,13 @@
-function Garde(intHauteur, intLargeur, intPosX, intPosY) {
+var intNbGardes = 0;
+function Garde(intHauteur, intLargeur, intPosX, intPosY, strDirection) {
     this.intHauteur = intHauteur * 0.90;
     this.intLargeur = intLargeur * 0.65;
     this.intX = intPosX * intLargeur;
     this.intY = intHauteur * intPosY - this.intHauteur / 2;
-    this.intTomber = 0.9; // constante 
-    this.intMonter = 0.5; //constante - plus rapide que tomber
+    this.intTomber = 0.4; // constante 
+    this.intMonter = 0.1; //constante - plus rapide que tomber
     this.intDirection = 1
-    this.intVitesse = 1/2;
+    this.intVitesse = 1/5;
     this.binDeplacableXDroite = false;
     this.binDeplacableYBas = false;
     this.binDeplacableXGauche = false;
@@ -18,7 +19,8 @@ function Garde(intHauteur, intLargeur, intPosX, intPosY) {
     this.intDessinerEchelleGarde = 0;
     this.intDessinRalentirGarde = 0;
     this.intGaucheOUDroiteGarde  = 0;
-    this.strDirection = 'droite';
+    this.strDirection = strDirection;
+    this.binLacher = false;
 
     this.binCollisionEchelleG = false
     this.binCollisionLingotG = false
@@ -82,7 +84,7 @@ Garde.prototype.mettreAJourGarde = function() {
     }
     
     for (let i = 0; i < tabObjGardes.length; i++) {
-        tabObjGardes[i].gestionCollisions(objC2D); 
+        tabObjGardes[i].gestionCollisions(); 
       }
 }
 
@@ -125,7 +127,7 @@ Garde.prototype.gestionCollisions = function () {
     && (this.intX - this.intLargeur / 2 - this.intVitesse) >= objMur2.intXFin
 
 
-    // console.log((this.intY / intHauteur) % 1)
+    // console.log((this.intX / intLargeur) % 1)
     this.binCollisionBriqueG = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '1';
     
     this.binCollisionVideG = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '.' 
@@ -159,17 +161,12 @@ Garde.prototype.gestionCollisions = function () {
         this.binCollisionVideG = false;
 
     }
-
-    // if (binCollisionEchelleG) {
-
-    // }
-
-    // if (binCollisionBriqueG) {
-
-    // }
-
+    
+    
+    
     for (let i = 0; i < tabObjGardes.length; i++) {
-        tabObjGardes[i].deplacement(objC2D); 
+        intNbGardes = i;
+        tabObjGardes[i].deplacement(); 
       }
 }
 
@@ -200,9 +197,9 @@ Garde.prototype.deplacement = function() {
         if (this.strDirection == 'droite') {
             this.intGaucheOUDroiteGarde = 0;
     
-            if (this.binCollisionBriqueG && this.binCollisionEchelleG) {
-                this.intX += (this.intVitesse*8)
-            }
+            // if (this.binCollisionBriqueG && this.binCollisionEchelleG) {
+            //     this.intX += (this.intVitesse*4)
+            // }
 
             if (this.binCollisionEchelleG && !binEnHautEchelle && this.binDeplacableYHaut) {
                 if (posY == 9 && posX == 2) {
@@ -224,7 +221,6 @@ Garde.prototype.deplacement = function() {
     
         }
     
-    
         //créer une valeur un Math.random pour choisir entre descendre l'échelle ou bien continuer tout droit
         //Créer une valeur un Math.random pour choisir entre monter l'échelle ou bien continuer tout droit
     
@@ -233,11 +229,9 @@ Garde.prototype.deplacement = function() {
     
             if ((binEnHautEchelle)  && this.binDeplacableXGauche) {
                 this.intX -= this.intVitesse
-                // this.intX -= this.intVitesse
             }
             if (this.binCollisionCordeG || this.binCollisionBriqueG) {
                 this.intX -= this.intVitesse
-                // this.intX -= this.intVitesse
             }
             if ((binEnHautEchelle || this.binCollisionEchelleG) && !this.binCollisionBriqueG) {
                 if (posY == 3) {
@@ -253,30 +247,116 @@ Garde.prototype.deplacement = function() {
     
         }
     }
-    // console.log(this.intX + "         " + (this.intVitesse) )
-
-    
-
-    // if (binCollisionBriqueG || (tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '3' 
-    // && tabChar[posY][posX] == '.' ) && this.binDeplacableX) {
-    //         this.intX += this.intVitesse * this.intDirection
-    //     // else {
-    //     //     this.intX += this.intVitesse * this.intDirection
-    //     // }
-    // }
-
-    // if (tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '3' 
-    // && tabChar[posY][posX] == '.' ) {
-    //     console.log(2)
-    //     this.intX -= this.intVitesse * this.intDirection
-    // }
-
-
-
-
-
 
     for (let i = 0; i < tabObjGardes.length; i++) {
         tabObjGardes[i].collision(objC2D); 
     }
+
+    
 }
+
+// Garde.prototype.deplacement = function() {
+//     const echelleOuMarcher = ['echelle', 'marcher']
+//     strChoix = echelleOuMarcher[Math.floor(Math.random() * echelleOuMarcher.length)] 
+//     var posX = Math.floor(this.intX / intLargeur) - 1
+//     var posY = Math.floor(this.intY / intHauteur) - 1
+//     var objMur = tabObjMurs[0];
+//     var objMur1 = tabObjMurs[1];
+//     var objMur2 = tabObjMurs[2];
+//     var objMur3 = tabObjMurs[3];
+//    var intV = this.intVitesse/(tabObjGardes.length+1)
+//     console.log(intV )
+//     var binEnHautEchelle = (tabChar[posY][posX] == '.' || tabChar[posY][posX] == '4')  && (tabChar[posY+1][posX] == '3') 
+//         && (this.intY / intHauteur) % 1 > 0.54 && (this.intY / intHauteur) % 1 < 0.6
+
+//     // console.log("Eche : " + binEnHautEchelle + " Vide : " + this.binCollisionVideG + " Brique :  " + this.binCollisionBriqueG)
+//     // if (intNbGardes == 1) {
+        
+//         this.binDeplacableXGauche = (this.intX - this.intLargeur / 2 - intV) >= objMur.intXFin
+//         this.binDeplacableXDroite = (this.intX + this.intLargeur / 2 + intV) <= objMur2.intXFin
+    
+//         this.binDeplacableYHaut = (this.intY - this.intHauteur / 2 - this.intMonter) >= objMur1.intYFin
+//         this.binDeplacableYBas = (this.intY + this.intHauteur / 2 + this.intMonter + intHauteur * 5) <= objMur3.intYDebut
+    
+    
+//         if(binStart) {
+//             if (this.binDeplacableXDroite && !this.binCollisionBriqueDGarde && !this.binCollisionBriqueGGarde && !this.binCollisionEchelleG && this.binCollisionVide) {
+//                 this.intX += intV
+//             }
+            
+//             if (this.strDirection == 'droite') {
+//                 this.intGaucheOUDroiteGarde = 0;
+        
+//                 if (this.binCollisionBriqueG && this.binCollisionEchelleG) {
+//                     this.intX += (intV)
+//                 }
+    
+//                 if (this.binCollisionEchelleG && !binEnHautEchelle && this.binDeplacableYHaut
+//                     && (!this.binCollisionBriqueDGarde && !this.binCollisionBriqueGGarde)) {
+//                     if (posY == 9 && posX == 2) {
+//                         this.intX += (intV)
+//                     }
+//                     else {
+//                         this.intY -= intV
+//                     }
+//                 }
+    
+//                 // console.log(tabChar[Math.floor((this.intY) / intHauteur) - 1][posX] == '4')
+        
+//                 if ((binEnHautEchelle || this.binCollisionBriqueG || this.binCollisionCordeG) && this.binDeplacableXDroite ) {
+//                     // console.log(2)
+//                     this.intX += intV            
+//                 }
+                
+//                 if (!this.binDeplacableXDroite) {
+//                     this.strDirection = 'gauche'
+//                 }
+    
+//     // console.log(Math.floor((this.intX / intLargeur) % 1) < 0.009 && binEnHautEchelle && this.binCollisionBriqueG && this.binCollisionCordeG)
+//                 if (Math.floor((this.intX / intLargeur) % 1) < 0.009 && !binEnHautEchelle && !this.binCollisionBriqueG 
+//                 && !this.binCollisionCordeG && !this.binCollisionVideG) {
+//                     // console.log((this.intX / intLargeur) % 1)
+//                     this.intX += 0.05         
+    
+//                     console.log ('oui')
+//                 }
+        
+//             }
+        
+//             //créer une valeur un Math.random pour choisir entre descendre l'échelle ou bien continuer tout droit
+//             //Créer une valeur un Math.random pour choisir entre monter l'échelle ou bien continuer tout droit
+        
+//             if (this.strDirection == 'gauche') {
+//                 this.intGaucheOUDroiteGarde = -1;
+        
+//                 if ((binEnHautEchelle)  && this.binDeplacableXGauche) {
+//                     this.intX -= intV
+//                     // this.intX -= this.intVitesse
+//                 }
+//                 if (this.binCollisionCordeG || this.binCollisionBriqueG) {
+//                     this.intX -= intV
+//                     // this.intX -= this.intVitesse
+//                 }
+//                 if ((binEnHautEchelle || this.binCollisionEchelleG) && !this.binCollisionBriqueG) {
+//                     if (posY == 3) {
+//                         this.intX -= intV
+//                     }
+//                     else {
+//                         this.intY += intV
+//                     }
+//                 }
+//                 if (!this.binDeplacableXGauche) {
+//                     this.strDirection = 'droite'
+//                 }
+        
+//             }
+//         }
+    
+//         for (let i = 0; i < tabObjGardes.length; i++) {
+//             tabObjGardes[i].collision(objC2D); 
+//         }
+//     // }
+
+    
+// }
+

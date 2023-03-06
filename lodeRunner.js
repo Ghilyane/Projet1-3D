@@ -39,7 +39,7 @@ Runner.prototype.dessinerLodeRunner = function (objC2D) {
     if (binCollisionBrique && this.binCourir) { // et s'il est sur une brique
         lodeAnimationCourir[intDessinerCourir]('');
     }
-    else if (binCollisionEchelle) {  // et s'il est sur une échelle 
+    else if (binCollisionEchelle || binCollisionEchelleNiveau) {  // et s'il est sur une échelle 
         lodeAnimationMonter[intDessinerEchelle]('');
     }
     else if (binCollisionCorde) { // et s'il est sur une corde
@@ -86,17 +86,18 @@ Runner.prototype.gererImmobilite = function () {
     }
 }
 
-let binCollisionEchelle = false
-let binCollisionEchelleNiveau = false
-let binCollisionLingot = false
-let binCollisionCorde = false
-let binCollisionBrique = false
+var binCollisionGarde = false;
+var binCollisionEchelle = false
+var binCollisionEchelleNiveau = false
+var binCollisionLingot = false
+var binCollisionCorde = false
+var binCollisionBrique = false
 var binCollisionLodeBriqueG = false;
 var binCollisionLodeBriqueD = false;
-let binCollisionVide = false
-let binCollisionGarde = false
-let nbrLingotsRamasse = 0
-let binCompleteNiveau = false
+var binCollisionVide = false
+var binCollisionGarde = false
+var nbrLingotsRamasse = 0
+var binCompleteNiveau = false
 var binLaisserTomber = false;
 
 Runner.prototype.collision = function () {
@@ -123,7 +124,7 @@ Runner.prototype.collision = function () {
 
     //Dessiner l'echelle de niveau lorsque le runner ramasse tout les lingots
     if (nbrLingotsRamasse == 6) {
-        echelle.binAjoutEchelleNiveau = true
+        objEchelle.binAjoutEchelleNiveau = true
     }
 
     // binCollisionCorde = tabChar[posY][posX] == '4'
@@ -131,16 +132,6 @@ Runner.prototype.collision = function () {
 
     //Faire tomber lorsque le runner est dans le vide
     binCollisionVide = tabChar[posY][posX] == '.' && !binCollisionEchelle && !binCollisionBrique && !binCollisionLingot
-
-    // if (binCollisionVide) {
-    //     binCollisionEchelle = Math.abs(this.intY - this.intHauteur / 2 - intHauteur) < Math.floor(this.intY / intHauteur) * intHauteur &&
-    //         this.intY > Math.floor(this.intY / intHauteur) * intHauteur
-    // }
-    // else {
-    //     binCollisionEchelle = tabChar[posY][posX] == '3' &&
-    //     Math.abs(this.intX - this.intLargeur / 2 - intLargeur) < Math.floor(this.intX / intLargeur) * intLargeur &&
-    //     this.intX > Math.floor(this.intX / intLargeur) * intLargeur
-    // }
 
     //Manipuler lorsqu'il atteint l'echelle de niveau
     var objMur = tabObjMurs[1];
@@ -234,6 +225,15 @@ Runner.prototype.gestionCollisions = function () {
     binCollisionLodeBriqueG = (tabChar[posY][posX-1] == '1'|| (tabChar[posY+1][posX-1] == '1') && (this.intY / intHauteur) % 1 > 0.62)  
     && (this.intX / intLargeur) % 1 <= 0.4
 
+
+    for (var i = 0; i < tabObjGardes.length; i++) {
+        var posGardeX = Math.floor(tabObjGardes[i].intX/ intLargeur) - 1
+        var posGardeY = Math.floor(tabObjGardes[i].intY / intHauteur) - 1
+        if (posGardeX == posX && posGardeY == posY) {
+            this.binCollisionGarde = true;
+            break;
+        }
+    }
     // console.log(tabChar[posY+1][posX-1] == '1' && (this.intY / intHauteur) % 1 > 0.6)
     // console.log("Y : " + posY + " X : " + (Math.floor((this.intX - this.intLargeur/2) / intLargeur) - 1))
 
@@ -250,20 +250,34 @@ Runner.prototype.gestionCollisions = function () {
 
     }
 
-    if (binCollisionEchelle) {
 
+    if (this.binCollisionGarde) {
+        // this.binCollisionGarde = true;
+        binStart = false;
     }
 
-    if (binCollisionBrique) {
+    var posX = Math.floor(this.intX / intLargeur) - 1
+    var posY = Math.floor(this.intY / intHauteur) - 1
+    // console.log((this.binCollisionGarde && !binStart))
 
+    if (this.binCollisionGarde && !binStart) {
+        for (var i = 0; i < 5; i++) {
+            if (i <= posY+1) {
+                this.intY -= (i);
+            }
+        }
     }
+
 }
 
 
 Runner.prototype.gererDeplacementRunner = function () {
     
-    binStart = !binStart ? true: true; 
+    if (!binStart) {
+        binStart = true
+    } 
     // console.log(booStart)
+
 
     switch (event.keyCode) {
         //37 - gauche
@@ -303,7 +317,6 @@ Runner.prototype.gererDeplacementRunner = function () {
         case 88:
             if (binCollisionBrique) {
                 objLodeRunner.creuserAGauche()
-                // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
             }
             break;
         case 90:
@@ -337,7 +350,6 @@ Runner.prototype.gererDeplacementRunner = function () {
             this.intY += this.intMonter * this.intDirection
         }
     }
-
     // var posX = Math.floor(this.intX / intLargeur) - 1
     // var posY = Math.floor(this.intY / intHauteur) - 1
 
@@ -349,17 +361,15 @@ Runner.prototype.gererDeplacementRunner = function () {
         intMsEcoulees = 0
         binStart = false
         strScore = (Number(strScore) + 1500).toString().padStart(7, '0')
-        strNiveau = Number(strNiveau) + 1
+        strNiveau = (Number(strNiveau) + 1).toString();
         tabChar = []
         initTabChar(tabInitial)
         nbrLingotsRamasse = 0
-        echelle.binAjoutEchelleNiveau = false
+        objEchelle.binAjoutEchelleNiveau = false
     }
 
     // console.log(binCollisionEchelle)
     // console.log(binCollisionLodeBriqueD)
-
-
     objLodeRunner.collision()
 }
 
