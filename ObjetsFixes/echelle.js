@@ -18,11 +18,8 @@ Echelle.prototype.dessinerEchelle = function (objC2D) {
             if (tabChar[i][j] == "3") {
                 objC2D.drawImage(objImgEchelle, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
             }
-            else if (tabChar[i][j] == "6" && binAjoutEchelleNiveau) {
+            else if (tabChar[i][j] == "6" && binAjoutEchelleNiveau == true) {
                 objC2D.drawImage(objImgEchelle, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
-            }
-            else if (tabChar[i][j] == '6' && !binAjoutEchelleNiveau) {
-                tabChar[i][j] = '.'
             }
         }
     }
