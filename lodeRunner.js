@@ -25,8 +25,6 @@ Runner.prototype.dessinerLodeRunner = function (objC2D) {
     objC2D.translate(this.intX, this.intY)
     objC2D.scale(intLargeur, intHauteur);
     objC2D.beginPath();
-    // objC2D.fillStyle = 'blue';
-    // objC2D.fillRect(-this.intLargeur / intLargeur / 2, -this.intHauteur / intHauteur / 2, this.intLargeur / intLargeur, this.intHauteur / intHauteur);
 
     // dessinerLodeR() //Créer boolean binCourir, binMonter, binTraverserCorde ===> Utiliser tout cela dans animation et non dans dessiner
     if (intGaucheOUDroite == 0) {
@@ -52,7 +50,6 @@ Runner.prototype.dessinerLodeRunner = function (objC2D) {
     objC2D.fillStyle = 'blue';
     objC2D.font = objCanvas.width / 1000 + 'pt Arial'
 
-    // objC2D.fillText(Math.floor(this.intX / intLargeur) - 1 + ', ' + (Math.floor(this.intY / intHauteur) - 1), -this.intLargeur / intLargeur / 2, -this.intHauteur / intHauteur / 2)
     objC2D.restore();
 }
 
@@ -74,9 +71,6 @@ Runner.prototype.mettreAJourLode = function () {
 
     objLodeRunner.gestionCollisions();
 }
-
-// let overlapX = false
-// let overlapY = false
 
 Runner.prototype.gererImmobilite = function () {
     this.binCourir = false;
@@ -104,9 +98,6 @@ Runner.prototype.collision = function () {
     var posX = Math.floor(this.intX / intLargeur) - 1
     var posY = Math.floor(this.intY / intHauteur) - 1
 
-    // var posXG = Math.floor(garde.intX / intLargeur) - 1
-    // var posYG = Math.floor(garde.intY / intHauteur) - 1
-
     binCollisionEchelleNiveau = tabChar[posY][posX] == '6' &&
         Math.abs(this.intX - this.intLargeur / 2 - intLargeur) < Math.floor(this.intX / intLargeur) * intLargeur &&
         this.intX > Math.floor(this.intX / intLargeur) * intLargeur
@@ -127,7 +118,6 @@ Runner.prototype.collision = function () {
         binAjoutEchelleNiveau = true
     }
 
-    // binCollisionCorde = tabChar[posY][posX] == '4'
     binCollisionBrique = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '1';
 
     //Faire tomber lorsque le runner est dans le vide
@@ -137,11 +127,6 @@ Runner.prototype.collision = function () {
     var objMur = tabObjMurs[1];
     binCompleteNiveau = tabChar[posY][posX] == '6' && Math.abs(this.intY - this.intHauteur / 2 - intHauteur) <= objMur.intYFin
 
-    // console.log('echelle: ' + binCollisionEchelle + '\n' + 'lingot: ' + binCollisionLingot + '\n'
-    //     + 'corde: ' + binCollisionCorde + '\n' + 'brique: ' + binCollisionBrique + '\n' + 'vide: ' + binCollisionVide + '\n' +
-    //     'niveau complet: ' + binCompleteNiveau)
-    //console.log('garde: ' + posX == posXG)
-    // console.log('garde: ' + posX == posXG)
 }
 
 let tabPositionsCreuser = new Array()
@@ -166,12 +151,11 @@ Runner.prototype.creuserAGauche = function () {
                 tabObjBriques[i].binTroue = true;
                 tabObjBriques[i].objDateHeure_1 = Date.now();
 
-                console.log(tabObjBriques[i].binTroue + "        " + tabObjBriques[i].objDateHeure_1 );
+                // console.log(tabObjBriques[i].binTroue + "        " + tabObjBriques[i].objDateHeure_1 );
             }
         }
     }
 }
-
 
 Runner.prototype.creuserADroite = function () {
     var posX = Math.floor(this.intX / intLargeur) - 1
@@ -192,11 +176,9 @@ Runner.prototype.creuserADroite = function () {
             && tabObjBriques[i].intPositionYCreuser == (posY +1)  ) {
                 tabObjBriques[i].binTroue = true;
                 tabObjBriques[i].objDateHeure_1 = Date.now();
-
-                console.log(tabObjBriques[i].binTroue + "        " + tabObjBriques[i].objDateHeure_1);
+                // console.log(tabObjBriques[i].binTroue + "        " + tabObjBriques[i].objDateHeure_1);
             }
         }
-        console.log(tabObjBriques)
     }
 }
 
@@ -204,11 +186,6 @@ Runner.prototype.creuserADroite = function () {
 Runner.prototype.gestionCollisions = function () {
     var posX = Math.floor(this.intX / intLargeur) - 1
     var posY = Math.floor(this.intY / intHauteur) - 1
-
-    // console.log((this.intY / intHauteur) % 1 + "    " + binCollisionBrique)
-    // console.log((this.intY / intHauteur) % 1 + "        Droite : " + binCollisionLodeBriqueD + "  Gauche : " + binCollisionLodeBriqueG)
-    // console.log((this.intX / intLargeur) % 1 + "        Droite : " + binCollisionLodeBriqueD + "  Gauche : " + binCollisionLodeBriqueG)
-    // binCollisionBrique = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '1';
     
     binCollisionVide = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '.' 
     || tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '2'
@@ -236,9 +213,7 @@ Runner.prototype.gestionCollisions = function () {
             break;
         }
     }
-    // console.log(tabChar[posY+1][posX-1] == '1' && (this.intY / intHauteur) % 1 > 0.6)
-    // console.log("Y : " + posY + " X : " + (Math.floor((this.intX - this.intLargeur/2) / intLargeur) - 1))
-
+   
     //Créer une collision pour les côtés
     if (binCollisionVide && (!binCollisionCorde || binLaisserTomber)) {
         this.intY += this.intTomber
@@ -352,9 +327,10 @@ Runner.prototype.gererDeplacementRunner = function () {
             this.intY += this.intMonter * this.intDirection
         }
     }
-    // var posX = Math.floor(this.intX / intLargeur) - 1
-    // var posY = Math.floor(this.intY / intHauteur) - 1
 
+    if (binCollisionGarde) {
+        objSons.runnerMeurt.play();
+    }
 
     if (binCompleteNiveau) {
         objSons.niveauComplete.play()
@@ -371,9 +347,7 @@ Runner.prototype.gererDeplacementRunner = function () {
         binAjoutEchelleNiveau = false
     }
 
-
-    // console.log(binCollisionEchelle)
-    // console.log(binCollisionLodeBriqueD)
+    // console.log(binAjoutEchelleNiveau)
     objLodeRunner.collision()
 }
 

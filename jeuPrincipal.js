@@ -23,10 +23,4 @@ class JeuPrincipal {
         return tabChar;
     }
 
-    dessiner() {
-        // this.objC2D.fillRect(0, 0,100,200);
-        // this.brique = new Brique(objC2D)
-        // this.brique.dessinerBrique();
-    }
-    
 }

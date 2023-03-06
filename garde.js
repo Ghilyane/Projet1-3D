@@ -22,6 +22,7 @@ function Garde(intHauteur, intLargeur, intPosX, intPosY, strDirection) {
     this.strDirection = strDirection;
     this.binLacher = false;
 
+    this.binCollisionTrou = false;
     this.binCollisionEchelleG = false
     this.binCollisionLingotG = false
     this.binCollisionCordeG = false
@@ -95,25 +96,11 @@ Garde.prototype.collision = function () {
     //En contact avec un lingot
     this.binCollisionLingotG = tabChar[posY][posX] == '2'
 
-    // binCollisionCorde = tabChar[posY][posX] == '4'
     this.binCollisionBriqueG = tabChar[Math.floor((this.intY + this.intHauteur/2) / intHauteur) - 1][posX] == '1';
 
     //Faire tomber lorsque le runner est dans le vide
     this.binCollisionVideG = tabChar[posY][posX] == '.' && !this.binCollisionEchelleG && !this.binCollisionBriqueG && !this.binCollisionLingotG
 
-    // if (binCollisionVideG) {
-    //     binCollisionEchelleG = Math.abs(this.intY - this.intHauteur / 2 - intHauteur) < Math.floor(this.intY / intHauteur) * intHauteur &&
-    //         this.intY > Math.floor(this.intY / intHauteur) * intHauteur
-    // }
-    // else {
-    //     binCollisionEchelleG = tabChar[posY][posX] == '3' &&
-    //     Math.abs(this.intX - this.intLargeur / 2 - intLargeur) < Math.floor(this.intX / intLargeur) * intLargeur &&
-    //     this.intX > Math.floor(this.intX / intLargeur) * intLargeur    
-    // }
-
-    // console.log('echelle: ' + binCollisionEchelle + '\n' + 'lingot: ' + binCollisionLingot + '\n'
-    //     + 'corde: ' + binCollisionCorde + '\n' + 'brique: ' + binCollisionBrique + '\n' + 'vide: ' + binCollisionVide + '\n' +
-    //     'niveau complet: ' + binCompleteNiveau)
 }
 
 Garde.prototype.gestionCollisions = function () {
@@ -145,9 +132,9 @@ Garde.prototype.gestionCollisions = function () {
     
     this.binCollisionBriqueGGarde = tabChar[posY][posX-1] == '1'|| (tabChar[posY+1][posX-1] == '1' && (this.intY / intHauteur) % 1 >= 0.585)
         // || tabChar[posY][Math.floor((this.intX - this.intLargeur/2) / intLargeur) - 1] == '1'
-    
-    // console.log(binCollisionBriqueGGarde)
-    // console.log("Y : " + posY + " X : " + (Math.floor((this.intX - this.intLargeur/2) / intLargeur) - 1))
+
+    this.binCollisionTrou =  tabChar[posY][posX-1] == '.' && posY == 15;
+    // console.log(this.binCollisionTrou)
 
     //Créer une collision pour les côtés
     if (this.binCollisionVideG && (!this.binCollisionCordeG || this.binLaisserTomberG)) {
@@ -196,10 +183,6 @@ Garde.prototype.deplacement = function() {
         
         if (this.strDirection == 'droite') {
             this.intGaucheOUDroiteGarde = 0;
-    
-            // if (this.binCollisionBriqueG && this.binCollisionEchelleG) {
-            //     this.intX += (this.intVitesse*4)
-            // }
 
             if (this.binCollisionEchelleG && !binEnHautEchelle && this.binDeplacableYHaut) {
                 if (posY == 9 && posX == 2) {
@@ -251,8 +234,6 @@ Garde.prototype.deplacement = function() {
     for (let i = 0; i < tabObjGardes.length; i++) {
         tabObjGardes[i].collision(objC2D); 
     }
-
-    
 }
 
 // Garde.prototype.deplacement = function() {

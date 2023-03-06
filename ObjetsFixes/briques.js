@@ -32,9 +32,6 @@ Brique.prototype.dessinerBrique = function (objC2D) {
         for (var j = 0; j < tabChar[0].length; j++) {
             if (tabChar[i][j] == "1" && !this.binTroue) {
                 objC2D.drawImage(objImgBrique, j * intLargeur, i * intHauteur, intLargeur, intHauteur);
-                //test
-                // objC2D.fillStyle = 'white'
-                // objC2D.fillText(j + " " + i, j * intLargeur, i * intHauteur)
             }
         }
     }
@@ -57,7 +54,7 @@ function mettreAJourBrique() {
             intDate1 = tabObjBriques[i].objDateHeure_1;
             // msEcoulees += objDateHeure_2 - intDate1;
             this.intTempsEcoule = tabObjBriques[i].intTempsEcoule;
-            console.log((this.intTempsEcoule)+ "   " + tabObjBriques[i].intTempsEcoule)
+            // console.log((this.intTempsEcoule)+ "   " + tabObjBriques[i].intTempsEcoule)
         }
     }
     tempsE = Math.floor((msEcoulees % 60000) / 1000)

@@ -25,7 +25,4 @@ function demarrer() {
     if (!binStart) { //mise en marche du chronomètre
             binStart = true;
     }
-        // else if (e.button == 0 && booStart) { //mise en arrêt du chronomètre 
-        //     booStart = false;
-        // }
 }
